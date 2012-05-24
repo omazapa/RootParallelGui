@@ -1,0 +1,34 @@
+project(root-parallel-gui)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
+FIND_PACKAGE(Qt4 REQUIRED  QtCore QtGui QtNetwork )
+FIND_PACKAGE(MPI)
+INCLUDE(CMakeForceCompiler)
+CMAKE_FORCE_CXX_COMPILER(mpic++ "MPI C++ Compiler")
+ADD_DEFINITIONS( -Wall -g )
+
+SET(ROOTSYS "/usr")
+SET(ROOTVERSION "5.32")
+SET(PLUGIN_NAME "root-parallel-gui")
+
+INCLUDE("${CMAKE_SOURCE_DIR}/cmake/RootMpiInstaller.cmake")
+
+
+INCLUDE_DIRECTORIES( ${MPI_INCLUDE_DIRS} "${ROOTSYS}/include/root" "${CMAKE_SOURCE_DIR}/mpi/inc" "${CMAKE_SOURCE_DIR}/mpi/inc/Mpi")
+
+LINK_DIRECTORIES( ${MPI_LIBRARY_DIRS} "${ROOTSYS}/lib/root" )
+
+#ROOTSYS should be loaded from environment variable
+SET(CMAKE_INSTALL_PREFIX ${ROOTSYS})
+
+
+SET(ROOT_LIBS Core Matrix MathCore Cint Net RIO Hist )
+
+SET(ROOT_PARALLEL_GUI_MPI True)
+
+IF(ROOT_PARALLEL_GUI_MPI)
+INCLUDE(${CMAKE_SOURCE_DIR}/cmake/RootParallelGuiMpi.cmake)
+ENDIF()
+
+MINSTALLFILE("DOC" ${ROOTMPITUTORIALSDIR})
+
+INCLUDE(CPack)

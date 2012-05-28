@@ -33,7 +33,7 @@ RootParallelGuiMpiLauncher::RootParallelGuiMpiLauncher(QWidget *parent): QWidget
    /*********************/
    futureRunner = new QFutureWatcher<void>();
 
-   RootMpiPath = "/usr/bin/mpirun";
+   MpiRunPath = "mpirun";
    StopPushButton->setEnabled(false);
    process = NULL;
 
@@ -226,6 +226,13 @@ void RootParallelGuiMpiLauncher::launch()
       args << "-q";
    }
 
+   #warning "Added options to disable Openib options in mpirun --mca btl ^openib "
+   args<<"--mca"<<"btl"<<"^openib";
+
+   if(MacroBinaryComboBox->currentIndex()==0)
+   {
+     args <<"root"<<"-q"<<"-l"<<"-x";
+   }
    args << ExecutableLineEdit->text();
 
    futureRunner->setFuture(QtConcurrent::run<void>(this, &RootParallelGuiMpiLauncher::runProcess));
@@ -241,7 +248,7 @@ void RootParallelGuiMpiLauncher::runProcess()
    connect(process, SIGNAL(started()), this, SLOT(started()));
    connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(finished(int, QProcess::ExitStatus)));
    qDebug() << args.join(" ");
-   process->start(RootMpiPath, args);
+   process->start(MpiRunPath, args);
    if (!process->waitForStarted()) {
       emit sendOutput(tr("Error Starting") + ExecutableLineEdit->text() + "<br>Msg:" + process->errorString().replace("\n", "<br>"));
       return;

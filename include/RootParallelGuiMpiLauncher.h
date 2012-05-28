@@ -48,10 +48,12 @@ protected:
 private:
    QFutureWatcher<void> *futureRunner;
    QProcess *process;
-   QString RootMpiPath;
+   QString MpiRunPath;
+   QString RootPath;
    QTimer *timer;
    Q_PID pid;
    QStringList args;
+   QStringList rootArgs;
 signals:
    void closeme(RootParallelGuiMpiLauncher*);
    void sendOutput(QString);

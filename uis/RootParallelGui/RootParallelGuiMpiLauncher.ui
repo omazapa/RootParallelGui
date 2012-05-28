@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>643</width>
+    <width>688</width>
     <height>570</height>
    </rect>
   </property>
@@ -27,9 +27,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>629</width>
-        <height>529</height>
+        <y>-30</y>
+        <width>650</width>
+        <height>545</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -42,27 +42,41 @@
           </sizepolicy>
          </property>
          <property name="title">
-          <string>Launch From Binary</string>
+          <string>Launch</string>
          </property>
          <property name="checkable">
           <bool>false</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
+          <item row="0" column="1">
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Executable Path</string>
+             <string>Path</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item row="0" column="2">
            <widget class="QLineEdit" name="ExecutableLineEdit"/>
           </item>
-          <item row="0" column="2">
+          <item row="0" column="3">
            <widget class="QToolButton" name="GetExecutableToolButton">
             <property name="text">
              <string>...</string>
             </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QComboBox" name="MacroBinaryComboBox">
+            <item>
+             <property name="text">
+              <string>Macro</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Binary</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -77,7 +91,7 @@
           <item row="0" column="0">
            <widget class="QTabWidget" name="tabWidget">
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -380,9 +394,9 @@ implicitly sets &quot;max_slots&quot; equal to the &quot;slots&quot; value for e
                  <property name="geometry">
                   <rect>
                    <x>0</x>
-                   <y>-53</y>
-                   <width>570</width>
-                   <height>432</height>
+                   <y>0</y>
+                   <width>568</width>
+                   <height>505</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_11">

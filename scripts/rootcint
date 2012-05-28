@@ -1,0 +1,49 @@
+#!/bin/bash
+###############################
+#Basic Configuration variables#
+###############################
+#Includes of RootMpi's Classes#
+IncludePath="include"
+#.cpp files path#
+CintSrcPath="src/"
+#rootcint command
+RootCint="rootcint"
+#scripts paths (for rootmpi)#
+ScriptsPath="scripts"
+ScriptParser="rootcint-parser"
+
+#Filename to cint output#
+CintRootParallelGuiOutput="$CintSrcPath/RootParallelGuiCint.cpp"
+CintRootParallelGuiMpiOutput="$CintSrcPath/RootParallelGuiCintMpi.cpp"
+
+#Headers to generate dictionaries#
+CintGuiHeaders[0]="$IncludePath/RootParallelGui.h"
+CintGuiHeaders[1]="$IncludePath/LinkDef.h"
+
+#Headers with mathematical algorithms#
+CintGuiMpiHeaders[0]="$IncludePath/RootParallelGuiMpiLauncher.h"
+CintGuiMpiHeaders[1]="$IncludePath/LinkDef_Mpi.h"
+
+#########################################################
+#generate dictionaries for parallelized math's libraries#
+#########################################################
+function CintRootParallelGui {
+$RootCint -f $CintRootParallelGuiOutput -c -I"$IncludePath" -I"$CintSrcPath" ${CintGuiHeaders[@]} 
+}
+
+
+######################################
+#generate base libraries dictionaries#
+######################################
+function CintRootParallelGuiMpi {
+$RootCint -f $CintRootParallelGuiMpiOutput -c -I"$IncludePath" -I"$CintSrcPath" ${CintGuiMpiHeaders[@]}
+}
+
+
+function  help {
+echo "rootmpicint Copyright Omar Andres Zapata Mesa"
+echo "Run in root's directory of the project, need etc/ scripts/ mpi/ paths and other directories to work good"
+}
+
+CintRootParallelGuiMpi
+CintRootParallelGui

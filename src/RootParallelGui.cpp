@@ -12,30 +12,33 @@
 *************************************************************************/
 #include<RootParallelGui.h>
 
-RootParallelGui::RootParallelGui(QMainWindow *parent): QMainWindow(parent)
+using namespace ROOT;
+ClassImp(ParallelGui)
+
+ParallelGui::ParallelGui(QMainWindow *parent): QMainWindow(parent)
 {
    setupUi(this);
-   Q_INIT_RESOURCE(RootParallelGui);
-   connect(RootMpiLauncherPushButton, SIGNAL(clicked()), this, SLOT(showMpiLauncher()));
+   Q_INIT_RESOURCE(ParallelGui);
+   connect(MpiLauncherPushButton, SIGNAL(clicked()), this, SLOT(showMpiLauncher()));
 }
 
-void RootParallelGui::showMpiLauncher()
+void ParallelGui::showMpiLauncher()
 {
-   MpiLauncher = new RootParallelGuiMpiLauncher;
+   MpiLauncher = new ParallelGuiMpiLauncher;
    ModulesTabWidget->addTab(MpiLauncher, "Mpi Launcher");
-   connect(MpiLauncher, SIGNAL(closeme(RootParallelGuiMpiLauncher*)), this, SLOT(closeMpiLauncher(RootParallelGuiMpiLauncher*)));
+   connect(MpiLauncher, SIGNAL(closeme(ParallelGuiMpiLauncher*)), this, SLOT(closeMpiLauncher(ParallelGuiMpiLauncher*)));
    connect(MpiLauncher, SIGNAL(sendOutput(QString)), this, SLOT(prepend(QString)));
    ModulesTabWidget->setCurrentWidget(MpiLauncher);
 }
 
-void RootParallelGui::prepend(QString msg)
+void ParallelGui::prepend(QString msg)
 {
    msg += OutputTextEdit->toHtml();
    OutputTextEdit->setHtml(msg);;
    OutputTextEdit->setFocus();
 }
 
-void RootParallelGui::closeMpiLauncher(RootParallelGuiMpiLauncher* mpiLauncher)
+void ParallelGui::closeMpiLauncher(ParallelGuiMpiLauncher* mpiLauncher)
 {
    int index = ModulesTabWidget->indexOf(mpiLauncher);
    ModulesTabWidget->removeTab(index);

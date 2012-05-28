@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="/">
+    <file>RootParallelGui/root-banner.png</file>
+    <file>RootParallelGui/rootmpi-exe.png</file>
+    <file>RootParallelGui/rootmpi-logo.png</file>
+    <file>RootParallelGui/proof-logo.png</file>
+    <file>RootParallelGui/root-logo.png</file>
+    <file>RootParallelGui/rootmpi-console.png</file>
+    <file>RootParallelGui/rootmpi-machines.png</file>
+  </qresource>
+</RCC>

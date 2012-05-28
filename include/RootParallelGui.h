@@ -13,20 +13,40 @@
 
 #ifndef ROOT_Parallel_Gui
 #define ROOT_Parallel_Gui
+
+#ifndef ROOT_Rtypes
+#include "Rtypes.h"
+#endif
+
+
+#ifdef __CINT__
+namespace Ui {
+   class RootParallelGui;
+}
+class QMainWindow;
+#else
 #include<ui_RootParallelGui.h>
-
+#endif
 #include<RootParallelGuiMpiLauncher.h>
+namespace ROOT {
+   class ParallelGui: public QMainWindow, Ui::RootParallelGui {
+#ifndef __CINT__
+      Q_OBJECT
+#endif
+   private:
+      ParallelGui(const ParallelGui &);
+      ParallelGui& operator=(const ParallelGui &);
+   public:
+      ParallelGui(QMainWindow *parent = 0);
+   protected slots:
+      void showMpiLauncher();
+      void closeMpiLauncher(ParallelGuiMpiLauncher* mpiLauncher);
+      void prepend(QString msg);
+   private:
+      ParallelGuiMpiLauncher *MpiLauncher;
+      ClassDef(ParallelGui, 1) //
+   };
 
-class RootParallelGui: public QMainWindow, Ui::RootParallelGui {
-   Q_OBJECT
-public:
-   RootParallelGui(QMainWindow *parent = 0);
-protected slots:
-   void showMpiLauncher();
-   void closeMpiLauncher(RootParallelGuiMpiLauncher* mpiLauncher);
-   void prepend(QString msg);
-private:
-   RootParallelGuiMpiLauncher *MpiLauncher;
-};
+}
 
 #endif

@@ -13,51 +13,80 @@
 
 #ifndef ROOT_Parallel_Gui_Mpi_Launcher
 #define ROOT_Parallel_Gui_Mpi_Launcher
+
+#ifndef ROOT_Rtypes
+#include "Rtypes.h"
+#endif
+#ifdef __CINT__
+class QWidget;
+class QProcess;
+class QByteArray;
+class QString;
+class QFutureWatcher<void>;
+class QStringList;
+class QTimer;
+typedef Long64_t Q_PID;
+namespace Ui {
+   class  RootParallelGuiMpiLauncher;
+}
+enum QProcess::ExitStatus;
+
+#else
 #include<ui_RootParallelGuiMpiLauncher.h>
 #include<QFutureWatcher>
 #include<QProcess>
 #include<QTimer>
+#endif
 
-class RootParallelGuiMpiLauncher: public QWidget, Ui::RootParallelGuiMpiLauncher {
-   Q_OBJECT
-public:
-   RootParallelGuiMpiLauncher(QWidget *parent = 0);
-   ~RootParallelGuiMpiLauncher();
-protected slots:
-   void launch();
-   void stop();
-   void close();
-   void getExecutable();
-   void readStandardError();
-   void readStandardOutput();
-   void started();
-   void finished(int exitCode, QProcess::ExitStatus exitStatus);
-   void updateTime();
-   void getPath();
-   void getPrefix();
-   void getTmpDir();
-   void getWdir();
-   void getPreloadFiles();
-   void removePreloadFiles();
-   void getPreloadFilesDestDir();
-   void addEnvironmentVariable();
-   void removeEnvironmentVariable();
-protected:
-   void runProcess();
-   void ParseOutput(QByteArray &output);
-private:
-   QFutureWatcher<void> *futureRunner;
-   QProcess *process;
-   QString MpiRunPath;
-   QString RootPath;
-   QTimer *timer;
-   Q_PID pid;
-   QStringList args;
-   QStringList rootArgs;
-signals:
-   void closeme(RootParallelGuiMpiLauncher*);
-   void sendOutput(QString);
+namespace ROOT {
+   class ParallelGuiMpiLauncher: public QWidget, Ui::RootParallelGuiMpiLauncher {
+#ifndef __CINT__
+      Q_OBJECT
+#endif
+   private:
+      ParallelGuiMpiLauncher(const ParallelGuiMpiLauncher &);
+      ParallelGuiMpiLauncher& operator=(const ParallelGuiMpiLauncher &);
 
-};
+   public:
+      ParallelGuiMpiLauncher(QWidget *parent = 0);
+      ~ParallelGuiMpiLauncher();
+   protected slots:
+      void launch();
+      void stop();
+      void close();
+      void getExecutable();
+      void readStandardError();
+      void readStandardOutput();
+      void started();
+      void finished(int exitCode, QProcess::ExitStatus exitStatus);
+      void updateTime();
+      void getPath();
+      void getPrefix();
+      void getTmpDir();
+      void getWdir();
+      void getPreloadFiles();
+      void removePreloadFiles();
+      void getPreloadFilesDestDir();
+      void addEnvironmentVariable();
+      void removeEnvironmentVariable();
+   protected:
+      void runProcess();
+      void ParseOutput(QByteArray &output);
+   signals:
+      void closeme(ParallelGuiMpiLauncher*);
+      void sendOutput(QString);
+   private:
+      QFutureWatcher<void> *futureRunner;
+      QProcess *process;
+      QString MpiRunPath;
+      QString RootPath;
+      QTimer *timer;
+      Q_PID pid;
+      QStringList args;
+      QStringList rootArgs;
+
+      ClassDef(ParallelGuiMpiLauncher, 1)
+   };
+}
 
 #endif

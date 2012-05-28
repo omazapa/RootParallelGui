@@ -17,7 +17,7 @@
 int main(int argc, char *argv[])
 {
    QApplication app(argc, argv);
-   RootParallelGui main;
+   ROOT::ParallelGui main;
    main.show();
    return app.exec();
 }

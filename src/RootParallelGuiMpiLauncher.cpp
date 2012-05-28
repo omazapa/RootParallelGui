@@ -15,11 +15,14 @@
 #include<QFileDialog>
 #include<QtCore>
 #include <Rtypes.h>
+using namespace ROOT;
 
-RootParallelGuiMpiLauncher::RootParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
+ClassImp(ParallelGuiMpiLauncher)
+
+ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
 {
    setupUi(this);
-   Q_INIT_RESOURCE(RootParallelGui);
+   Q_INIT_RESOURCE(ParallelGuiMpi);
    connect(LaunchPushButton, SIGNAL(clicked()), this, SLOT(launch()));
    connect(StopPushButton, SIGNAL(clicked()), this, SLOT(stop()));
    connect(ClosePushButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -51,60 +54,60 @@ RootParallelGuiMpiLauncher::RootParallelGuiMpiLauncher(QWidget *parent): QWidget
    connect(RemoveEnvironmentVariableToolButton, SIGNAL(clicked()), this, SLOT(removeEnvironmentVariable()));
 }
 
-RootParallelGuiMpiLauncher::~RootParallelGuiMpiLauncher()
+ParallelGuiMpiLauncher::~ParallelGuiMpiLauncher()
 {
    delete futureRunner;
 }
 
-void RootParallelGuiMpiLauncher::getPath()
+void ParallelGuiMpiLauncher::getPath()
 {
    PathLineEdit->setText(QFileDialog::getExistingDirectory(this));
 }
 
-void RootParallelGuiMpiLauncher::getPrefix()
+void ParallelGuiMpiLauncher::getPrefix()
 {
    PrefixLineEdit->setText(QFileDialog::getExistingDirectory(this));
 }
 
-void RootParallelGuiMpiLauncher::getTmpDir()
+void ParallelGuiMpiLauncher::getTmpDir()
 {
    TmpdirLineEdit->setText(QFileDialog::getExistingDirectory(this));
 }
 
-void RootParallelGuiMpiLauncher::getWdir()
+void ParallelGuiMpiLauncher::getWdir()
 {
    WdirLineEdit->setText(QFileDialog::getExistingDirectory(this));
 }
 
-void RootParallelGuiMpiLauncher::getPreloadFiles()
+void ParallelGuiMpiLauncher::getPreloadFiles()
 {
    QStringList files = QFileDialog::getOpenFileNames(this);
    PreloadFilesListWidget->addItems(files);
 }
-void RootParallelGuiMpiLauncher::removePreloadFiles()
+void ParallelGuiMpiLauncher::removePreloadFiles()
 {
    if (PreloadFilesListWidget->currentItem() != NULL) {
       PreloadFilesListWidget->removeItemWidget(PreloadFilesListWidget->takeItem(PreloadFilesListWidget->currentRow()));
    }
 }
 
-void RootParallelGuiMpiLauncher::getPreloadFilesDestDir()
+void ParallelGuiMpiLauncher::getPreloadFilesDestDir()
 {
    PreloadFilesDestDirLineEdit->setText(QFileDialog::getExistingDirectory(this));
 }
 
-void RootParallelGuiMpiLauncher::addEnvironmentVariable()
+void ParallelGuiMpiLauncher::addEnvironmentVariable()
 {
    EnvironmentVariablesTableWidget->insertRow(0);
 }
 
-void RootParallelGuiMpiLauncher::removeEnvironmentVariable()
+void ParallelGuiMpiLauncher::removeEnvironmentVariable()
 {
    EnvironmentVariablesTableWidget->removeRow(EnvironmentVariablesTableWidget->currentRow());
 }
 
 
-void RootParallelGuiMpiLauncher::launch()
+void ParallelGuiMpiLauncher::launch()
 {
    if (ExecutableLineEdit->text().isEmpty()) {
       QMessageBox::critical(this, tr("Error"), tr("Select executable to run first"));
@@ -226,20 +229,19 @@ void RootParallelGuiMpiLauncher::launch()
       args << "-q";
    }
 
-   #warning "Added options to disable Openib options in mpirun --mca btl ^openib "
-   args<<"--mca"<<"btl"<<"^openib";
+#warning "Added options to disable Openib options in mpirun --mca btl ^openib "
+   args << "--mca" << "btl" << "^openib";
 
-   if(MacroBinaryComboBox->currentIndex()==0)
-   {
-     args <<"root"<<"-q"<<"-l"<<"-x";
+   if (MacroBinaryComboBox->currentIndex() == 0) {
+      args << "root" << "-q" << "-l" << "-x";
    }
    args << ExecutableLineEdit->text();
 
-   futureRunner->setFuture(QtConcurrent::run<void>(this, &RootParallelGuiMpiLauncher::runProcess));
+   futureRunner->setFuture(QtConcurrent::run<void>(this, &ParallelGuiMpiLauncher::runProcess));
 }
 
 
-void RootParallelGuiMpiLauncher::runProcess()
+void ParallelGuiMpiLauncher::runProcess()
 {
    process = new QProcess(futureRunner);
    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -262,14 +264,14 @@ void RootParallelGuiMpiLauncher::runProcess()
 
 }
 
-void RootParallelGuiMpiLauncher::finished(int exitCode, QProcess::ExitStatus exitStatus)
+void ParallelGuiMpiLauncher::finished(int exitCode, QProcess::ExitStatus exitStatus)
 {
    timer->stop();
    StopPushButton->setEnabled(false);
    LaunchPushButton->setEnabled(true);
 }
 
-void RootParallelGuiMpiLauncher::started()
+void ParallelGuiMpiLauncher::started()
 {
    TimeDoubleSpinBox->setValue(0);
    timer->start(1);
@@ -277,13 +279,13 @@ void RootParallelGuiMpiLauncher::started()
    LaunchPushButton->setEnabled(false);
 }
 
-void RootParallelGuiMpiLauncher::updateTime()
+void ParallelGuiMpiLauncher::updateTime()
 {
    double currentTime = TimeDoubleSpinBox->value() + 0.001;
    TimeDoubleSpinBox->setValue(currentTime);
 }
 
-void RootParallelGuiMpiLauncher::readStandardError()
+void ParallelGuiMpiLauncher::readStandardError()
 {
    QByteArray Stderr = process->readAllStandardError();
    ParseOutput(Stderr);
@@ -296,7 +298,7 @@ void RootParallelGuiMpiLauncher::readStandardError()
    }
 }
 
-void RootParallelGuiMpiLauncher::readStandardOutput()
+void ParallelGuiMpiLauncher::readStandardOutput()
 {
    QByteArray Stdout = process->readAllStandardOutput();
    ParseOutput(Stdout);
@@ -310,7 +312,7 @@ void RootParallelGuiMpiLauncher::readStandardOutput()
 }
 
 
-void RootParallelGuiMpiLauncher::stop()
+void ParallelGuiMpiLauncher::stop()
 {
    timer->stop();
    process->kill();
@@ -319,7 +321,7 @@ void RootParallelGuiMpiLauncher::stop()
 }
 
 
-void RootParallelGuiMpiLauncher::close()
+void ParallelGuiMpiLauncher::close()
 {
    //if some process is running finish process before close this widget
    if (process != NULL) {
@@ -329,13 +331,13 @@ void RootParallelGuiMpiLauncher::close()
    emit closeme(this);
 }
 
-void RootParallelGuiMpiLauncher::getExecutable()
+void ParallelGuiMpiLauncher::getExecutable()
 {
    QString File = QFileDialog::getOpenFileName(this, tr("Open Executable"));
    if (!File.isEmpty()) ExecutableLineEdit->setText(File);
 }
 
-void RootParallelGuiMpiLauncher::ParseOutput(QByteArray &output)
+void ParallelGuiMpiLauncher::ParseOutput(QByteArray &output)
 {
    //parse from stdout/stderr
    //red

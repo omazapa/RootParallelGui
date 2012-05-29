@@ -18,13 +18,14 @@ ClassImp(ParallelGui)
 ParallelGui::ParallelGui(QMainWindow *parent): QMainWindow(parent)
 {
    setupUi(this);
-   Q_INIT_RESOURCE(ParallelGui);
+//    Q_INIT_RESOURCE(ParallelGui);
    connect(MpiLauncherPushButton, SIGNAL(clicked()), this, SLOT(showMpiLauncher()));
 }
 
 void ParallelGui::showMpiLauncher()
 {
    MpiLauncher = new ParallelGuiMpiLauncher;
+   MpiLauncher->SetEmitOutput(true);
    ModulesTabWidget->addTab(MpiLauncher, "Mpi Launcher");
    connect(MpiLauncher, SIGNAL(closeme(ParallelGuiMpiLauncher*)), this, SLOT(closeMpiLauncher(ParallelGuiMpiLauncher*)));
    connect(MpiLauncher, SIGNAL(sendOutput(QString)), this, SLOT(prepend(QString)));

@@ -15,14 +15,16 @@
 #include<QFileDialog>
 #include<QtCore>
 #include <Rtypes.h>
+#include<TROOT.h>
+#include<iostream>
+
 using namespace ROOT;
-
 ClassImp(ParallelGuiMpiLauncher)
-
 ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
 {
    setupUi(this);
-   Q_INIT_RESOURCE(ParallelGuiMpi);
+//    Q_INIT_RESOURCE(ParallelGuiMpi);
+
    connect(LaunchPushButton, SIGNAL(clicked()), this, SLOT(launch()));
    connect(StopPushButton, SIGNAL(clicked()), this, SLOT(stop()));
    connect(ClosePushButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -39,7 +41,6 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    MpiRunPath = "mpirun";
    StopPushButton->setEnabled(false);
    process = NULL;
-
    /********************************************
    *  To manage files and runtime environment *
    ********************************************/
@@ -52,6 +53,7 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    connect(PreloadFilesDestDirToolButton, SIGNAL(clicked()), this, SLOT(getPreloadFilesDestDir()));
    connect(AddEnvironmentVariableToolButton, SIGNAL(clicked()), this, SLOT(addEnvironmentVariable()));
    connect(RemoveEnvironmentVariableToolButton, SIGNAL(clicked()), this, SLOT(removeEnvironmentVariable()));
+   bEmitOuput = false;
 }
 
 ParallelGuiMpiLauncher::~ParallelGuiMpiLauncher()
@@ -288,26 +290,37 @@ void ParallelGuiMpiLauncher::updateTime()
 void ParallelGuiMpiLauncher::readStandardError()
 {
    QByteArray Stderr = process->readAllStandardError();
-   ParseOutput(Stderr);
-   Stderr.trimmed();
-   if (!Stderr.isEmpty()) {
-      QString ErrorMsg = "<br><span style=\"font-weight:600; color:#ff0000;\">Error:</span><br>";
-      ErrorMsg += Stderr.constData();
-      ErrorMsg.replace("\n", "<br>");
-      emit  sendOutput(ErrorMsg);
+   if (bEmitOuput) {
+      ParseOutput(Stderr);
+      Stderr.trimmed();
+      if (!Stderr.isEmpty()) {
+         QString ErrorMsg = "<br><span style=\"font-weight:600; color:#ff0000;\">Error:</span><br>";
+         ErrorMsg += Stderr.constData();
+         ErrorMsg.replace("\n", "<br>");
+         emit  sendOutput(ErrorMsg);
+      }
+
+   } else {
+      std::cerr << "\033[01;31m" << "Error: " << "\033[00m" << Stderr.data();
+      std::cerr.flush();
    }
 }
 
 void ParallelGuiMpiLauncher::readStandardOutput()
 {
    QByteArray Stdout = process->readAllStandardOutput();
-   ParseOutput(Stdout);
-   Stdout.trimmed();
-   if (!Stdout.isEmpty()) {
-      QString Msg = "<br><span style=\"font-weight:600; color:#0000ff;\">Output:</span><br>";
-      Msg += Stdout.constData();
-      Msg.replace("\n", "<br>");
-      emit  sendOutput(Msg);
+   if (bEmitOuput) {
+      ParseOutput(Stdout);
+      Stdout.trimmed();
+      if (!Stdout.isEmpty()) {
+         QString Msg = "<br><span style=\"font-weight:600; color:#0000ff;\">Output:</span><br>";
+         Msg += Stdout.constData();
+         Msg.replace("\n", "<br>");
+         emit  sendOutput(Msg);
+      }
+   } else {
+      std::cout << "\033[01;34m" << "Output: " << "\033[00m" << Stdout.data();
+      std::cout.flush();
    }
 }
 

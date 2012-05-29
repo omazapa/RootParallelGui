@@ -30,7 +30,6 @@ namespace Ui {
    class  RootParallelGuiMpiLauncher;
 }
 enum QProcess::ExitStatus;
-
 #else
 #include<ui_RootParallelGuiMpiLauncher.h>
 #include<QFutureWatcher>
@@ -50,6 +49,12 @@ namespace ROOT {
    public:
       ParallelGuiMpiLauncher(QWidget *parent = 0);
       ~ParallelGuiMpiLauncher();
+      inline void Show() {
+         this->show();
+      }
+      inline void SetEmitOutput(Bool_t status = true) {
+         bEmitOuput = status;
+      }
    protected slots:
       void launch();
       void stop();
@@ -84,6 +89,7 @@ namespace ROOT {
       Q_PID pid;
       QStringList args;
       QStringList rootArgs;
+      Bool_t bEmitOuput;
 
       ClassDef(ParallelGuiMpiLauncher, 1)
    };

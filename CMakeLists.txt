@@ -1,7 +1,9 @@
 project(root-parallel-gui)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
+SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_SOURCE_DIR}/cmake")
 FIND_PACKAGE(Qt4 REQUIRED  QtCore QtGui QtNetwork )
 FIND_PACKAGE(MPI)
+FIND_PACKAGE(QScintilla REQUIRED)
 INCLUDE(CMakeForceCompiler)
 CMAKE_FORCE_CXX_COMPILER(mpic++ "MPI C++ Compiler")
 ADD_DEFINITIONS( -Wall -g )
@@ -70,6 +72,7 @@ ${ROOT_PARALLEL_GUI_MOC_SRCS}
 )
 
 TARGET_LINK_LIBRARIES(ParallelGui ${ROOT_LIBS} QtCore QtGui )
+ADD_DEPENDENCIES(ParallelGui ParallelGuiMpi)
 
 SET(ROOT_PARALLEL_GUI_MAIN_SRCS ${CMAKE_SOURCE_DIR}/src/RootParallelGuiMain.cpp)
 
@@ -77,7 +80,7 @@ ADD_EXECUTABLE(RootParallelGui
 ${ROOT_PARALLEL_GUI_MAIN_SRCS}
 )
 
-TARGET_LINK_LIBRARIES(RootParallelGui ParallelGui ParallelGuiMpi ${ROOT_LIBS} QtCore QtGui)
+TARGET_LINK_LIBRARIES(RootParallelGui ParallelGui ParallelGuiMpi ${ROOT_LIBS} QtCore QtGui ${QSCINTILLA_LIBRARIES})
 
 
 

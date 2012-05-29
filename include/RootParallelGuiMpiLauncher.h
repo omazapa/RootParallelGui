@@ -25,6 +25,7 @@ class QString;
 class QFutureWatcher<void>;
 class QStringList;
 class QTimer;
+class QFile;
 typedef Long64_t Q_PID;
 namespace Ui {
    class  RootParallelGuiMpiLauncher;
@@ -35,6 +36,7 @@ enum QProcess::ExitStatus;
 #include<QFutureWatcher>
 #include<QProcess>
 #include<QTimer>
+#include<QFile>
 #endif
 
 namespace ROOT {
@@ -74,6 +76,9 @@ namespace ROOT {
       void getPreloadFilesDestDir();
       void addEnvironmentVariable();
       void removeEnvironmentVariable();
+      void saveMacro();
+      //index 0 macro mode and 1 binary mode 
+      void setMacroBinaryMode(int);
    protected:
       void runProcess();
       void ParseOutput(QByteArray &output);
@@ -90,7 +95,7 @@ namespace ROOT {
       QStringList args;
       QStringList rootArgs;
       Bool_t bEmitOuput;
-
+      QFile *fMacro;
       ClassDef(ParallelGuiMpiLauncher, 1)
    };
 }

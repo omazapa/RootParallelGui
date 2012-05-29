@@ -17,6 +17,21 @@
 #include <Rtypes.h>
 #include<TROOT.h>
 #include<iostream>
+#include<Qsci/qscilexercpp.h>
+#include<QFileInfo>
+#include<TTabCom.h>
+//tmp utility function
+bool isWritable(QString file)
+{
+   QFileInfo *fileInfo=new QFileInfo(file);
+   if(!fileInfo->isWritable())
+   {
+     delete fileInfo;
+     return false;
+   }
+   delete fileInfo;
+   return true;
+}
 
 using namespace ROOT;
 ClassImp(ParallelGuiMpiLauncher)
@@ -24,7 +39,20 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
 {
    setupUi(this);
 //    Q_INIT_RESOURCE(ParallelGuiMpi);
-
+   fMacro=NULL;
+   //QScintilla configuration
+   MacroTextEdit->setLexer(new QsciLexerCPP);
+   MacroTextEdit->setIndentationGuidesBackgroundColor(QColor("#e6e6de"));
+   MacroTextEdit->setAutoCompletionThreshold(2);
+   MacroTextEdit->setFolding(QsciScintilla::BoxedFoldStyle);;
+   MacroTextEdit->setMarginLineNumbers(1,true);
+   MacroTextEdit->setAutoCompletionFillupsEnabled(true);
+   MacroTextEdit->setAutoCompletionSource(QsciScintilla::AcsAll);
+   MacroTextEdit->setCaretWidth(10);
+   MacroTextEdit->setCaretLineBackgroundColor(QColor("#e6fff0"));
+   MacroTextEdit->setCaretLineVisible(true);
+   MacroTextEdit->ensureLineVisible(1); 
+   MacroTextEdit->setUtf8(true);
    connect(LaunchPushButton, SIGNAL(clicked()), this, SLOT(launch()));
    connect(StopPushButton, SIGNAL(clicked()), this, SLOT(stop()));
    connect(ClosePushButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -54,6 +82,11 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    connect(AddEnvironmentVariableToolButton, SIGNAL(clicked()), this, SLOT(addEnvironmentVariable()));
    connect(RemoveEnvironmentVariableToolButton, SIGNAL(clicked()), this, SLOT(removeEnvironmentVariable()));
    bEmitOuput = false;
+   
+   
+   connect(SaveToolButton,SIGNAL(clicked ()),this,SLOT(saveMacro()));
+   connect(MacroBinaryComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(setMacroBinaryMode(int)));
+
 }
 
 ParallelGuiMpiLauncher::~ParallelGuiMpiLauncher()
@@ -348,6 +381,45 @@ void ParallelGuiMpiLauncher::getExecutable()
 {
    QString File = QFileDialog::getOpenFileName(this, tr("Open Executable"));
    if (!File.isEmpty()) ExecutableLineEdit->setText(File);
+   if(MacroBinaryComboBox->currentIndex()==0){
+   if(fMacro) delete fMacro;
+   fMacro=new QFile(File);
+   if(isWritable(File))
+   {
+       if (!fMacro->open(QIODevice::ReadWrite| QIODevice::Text))
+       return;
+        QByteArray text=fMacro->readAll();
+        MacroTextEdit->setText(text.data());
+        SaveToolButton->setEnabled(true);
+   }else{
+       if (!fMacro->open(QIODevice::ReadOnly| QIODevice::Text))
+       return;
+       QByteArray text=fMacro->readAll();
+        MacroTextEdit->setText(text.data());
+        MacroTextEdit->setReadOnly(true);
+        SaveToolButton->setEnabled(false);
+  }
+  }
+}
+
+void ParallelGuiMpiLauncher::saveMacro()
+{
+  if(fMacro)
+  {
+    fMacro->resize(0);
+    fMacro->write(MacroTextEdit->text().toStdString().c_str());
+    fMacro->flush();
+  }
+}
+
+void ParallelGuiMpiLauncher::setMacroBinaryMode(int mode)
+{
+  if(mode==0)
+  {
+    tabWidget->setTabEnabled(4,true);
+  }else{
+    tabWidget->setTabEnabled(4,false);
+  }
 }
 
 void ParallelGuiMpiLauncher::ParseOutput(QByteArray &output)

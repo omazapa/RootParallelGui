@@ -1,12 +1,12 @@
 
 #Basic Information
-set(CPACK_PACKAGE_NAME "root-plugin-mpi")
+set(CPACK_PACKAGE_NAME "root-parallel-gui")
 set(CPACK_PACKAGE_VENDOR "UdeA At Colombia")
 set(CPACK_PACKAGE_CONTACT "andresete.chaos@gmail.com" "sigifredo89@gmail.com" "muzgash@gmail.com")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Nowadays it is necessary to paralellize code most importantly within science areas and given the advanages that ROOT brings to the scientific calculations, mpi appears as an essential extension just because with this support it will be much easier for the user to write efficient and distributed routines without the need to resort to complicated syntaxes which we face when writing code with this separated dependencies. ROOT lacks this capability and we are giving this advantage to it to expand his usage and demand.")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Graphical User Interfaces for Parallel technologies on cern's ROOT libraries")
 
 IF(${CMAKE_HOST_SYSTEM} MATCHES "Linux")
-     SET(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS},libqt4-core  (>= 4.7),libqt4-gui (>= 4.7),openmpi-bin")
+     SET(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS},libqt4-core  (>= 4.7),libqt4-gui (>= 4.7),openmpi-bin,libqscintilla2-8,root-system")
 ENDIF()
 
 IF (WIN32)

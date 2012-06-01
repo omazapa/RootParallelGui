@@ -17,7 +17,6 @@
 #include <Rtypes.h>
 #include<TROOT.h>
 #include<iostream>
-#include<Qsci/qscilexercpp.h>
 #include<QFileInfo>
 #include<TTabCom.h>
 //tmp utility function
@@ -40,19 +39,6 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    setupUi(this);
 //    Q_INIT_RESOURCE(ParallelGuiMpi);
    fMacro=NULL;
-   //QScintilla configuration
-   MacroTextEdit->setLexer(new QsciLexerCPP);
-   MacroTextEdit->setIndentationGuidesBackgroundColor(QColor("#e6e6de"));
-   MacroTextEdit->setAutoCompletionThreshold(2);
-   MacroTextEdit->setFolding(QsciScintilla::BoxedFoldStyle);;
-   MacroTextEdit->setMarginLineNumbers(1,true);
-   MacroTextEdit->setAutoCompletionFillupsEnabled(true);
-   MacroTextEdit->setAutoCompletionSource(QsciScintilla::AcsAll);
-   MacroTextEdit->setCaretWidth(10);
-   MacroTextEdit->setCaretLineBackgroundColor(QColor("#e6fff0"));
-   MacroTextEdit->setCaretLineVisible(true);
-   MacroTextEdit->ensureLineVisible(1); 
-   MacroTextEdit->setUtf8(true);
    connect(LaunchPushButton, SIGNAL(clicked()), this, SLOT(launch()));
    connect(StopPushButton, SIGNAL(clicked()), this, SLOT(stop()));
    connect(ClosePushButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -407,7 +393,7 @@ void ParallelGuiMpiLauncher::saveMacro()
   if(fMacro)
   {
     fMacro->resize(0);
-    fMacro->write(MacroTextEdit->text().toStdString().c_str());
+    fMacro->write(MacroTextEdit->toPlainText().toStdString().c_str());
     fMacro->flush();
   }
 }

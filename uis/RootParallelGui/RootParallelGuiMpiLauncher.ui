@@ -978,20 +978,7 @@ p, li { white-space: pre-wrap; }
                </spacer>
               </item>
               <item row="0" column="0" colspan="2">
-               <widget class="QsciScintilla" name="MacroTextEdit">
-                <property name="toolTip">
-                 <string/>
-                </property>
-                <property name="whatsThis">
-                 <string/>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Sunken</enum>
-                </property>
-               </widget>
+               <widget class="QTextEdit" name="MacroTextEdit"/>
               </item>
              </layout>
             </widget>
@@ -1080,13 +1067,6 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QsciScintilla</class>
-   <extends>QFrame</extends>
-   <header>Qsci/qsciscintilla.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../../resources/RootParallelGui.qrc"/>
  </resources>

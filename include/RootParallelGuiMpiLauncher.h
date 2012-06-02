@@ -57,7 +57,7 @@ namespace ROOT {
       inline void SetEmitOutput(Bool_t status = true) {
          bEmitOuput = status;
       }
-   protected slots:
+   public slots:
       void launch();
       void stop();
       void close();

@@ -38,7 +38,7 @@ namespace ROOT {
       ParallelGui& operator=(const ParallelGui &);
    public:
       ParallelGui(QMainWindow *parent = 0);
-   protected slots:
+   public slots:
       void showMpiLauncher();
       void closeMpiLauncher(ParallelGuiMpiLauncher* mpiLauncher);
       void prepend(QString msg);

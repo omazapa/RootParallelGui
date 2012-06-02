@@ -19,6 +19,9 @@
 #include<iostream>
 #include<QFileInfo>
 #include<TTabCom.h>
+
+using namespace ROOT;
+ClassImp(ParallelGuiMpiLauncher)
 //tmp utility function
 bool isWritable(QString file)
 {
@@ -32,8 +35,6 @@ bool isWritable(QString file)
    return true;
 }
 
-using namespace ROOT;
-ClassImp(ParallelGuiMpiLauncher)
 ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
 {
    setupUi(this);
@@ -249,10 +250,10 @@ void ParallelGuiMpiLauncher::launch()
    } else {
       args << "-q";
    }
-
+#ifndef _WIN32
 #warning "Added options to disable Openib options in mpirun --mca btl ^openib "
    args << "--mca" << "btl" << "^openib";
-
+#endif
    if (MacroBinaryComboBox->currentIndex() == 0) {
       args << "root" << "-q" << "-l" << "-x";
    }

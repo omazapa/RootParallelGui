@@ -26,6 +26,7 @@ class QFutureWatcher<void>;
 class QStringList;
 class QTimer;
 class QFile;
+class QProcessEnvironment;
 typedef Long64_t Q_PID;
 namespace Ui {
    class  RootParallelGuiMpiLauncher;
@@ -77,7 +78,7 @@ namespace ROOT {
       void addEnvironmentVariable();
       void removeEnvironmentVariable();
       void saveMacro();
-      //index 0 macro mode and 1 binary mode 
+      //index 0 macro mode and 1 binary mode
       void setMacroBinaryMode(int);
    protected:
       void runProcess();

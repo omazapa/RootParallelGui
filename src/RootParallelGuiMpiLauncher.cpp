@@ -268,7 +268,7 @@ void ParallelGuiMpiLauncher::launch()
 #endif
    if (MacroBinaryComboBox->currentIndex() == 0) {
 #ifdef _WIN32
-      args << RootPath+"/bin/root.exe" << "-q" << "-l" << "-x";
+      args << "root.exe" << "-q" << "-l" << "-x";
 #else
       args << "root" << "-q" << "-l" << "-x";
 #endif

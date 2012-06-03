@@ -96,6 +96,7 @@ namespace ROOT {
       QStringList rootArgs;
       Bool_t bEmitOuput;
       QFile *fMacro;
+      QProcessEnvironment env;
       ClassDef(ParallelGuiMpiLauncher, 1)
    };
 }

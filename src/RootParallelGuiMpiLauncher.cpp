@@ -73,6 +73,18 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    
    connect(SaveToolButton,SIGNAL(clicked ()),this,SLOT(saveMacro()));
    connect(MacroBinaryComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(setMacroBinaryMode(int)));
+   
+#ifdef _WIN32
+   RootPath="C:\\root";
+#else 
+   RootPath="/usr/";
+#endif
+
+   env=QProcessEnvironment::systemEnvironment();
+   env.insert("PATH", env.value("PATH") + QString(RootPath+"\\bin"));
+   
+   ;
+   
 
 }
 
@@ -255,7 +267,11 @@ void ParallelGuiMpiLauncher::launch()
    args << "--mca" << "btl" << "^openib";
 #endif
    if (MacroBinaryComboBox->currentIndex() == 0) {
+#ifdef _WIN32
+      args << RootPath+"/bin/root.exe" << "-q" << "-l" << "-x";
+#else
       args << "root" << "-q" << "-l" << "-x";
+#endif
    }
    args << ExecutableLineEdit->text();
 
@@ -266,6 +282,7 @@ void ParallelGuiMpiLauncher::launch()
 void ParallelGuiMpiLauncher::runProcess()
 {
    process = new QProcess(futureRunner);
+   process->setProcessEnvironment(env);
    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
    connect(process, SIGNAL(readyReadStandardError()), this, SLOT(readStandardError()));
    connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(readStandardOutput()));

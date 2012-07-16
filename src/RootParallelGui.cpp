@@ -48,6 +48,7 @@ void ParallelGui::closeMpiLauncher(ParallelGuiMpiLauncher* mpiLauncher)
    delete mpiLauncher;
 }
 
-static void  InitResources(){
-     Q_INIT_RESOURCE(RootParallelGui);
+static void  InitResources()
+{
+   Q_INIT_RESOURCE(RootParallelGui);
 }

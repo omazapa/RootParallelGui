@@ -16,15 +16,18 @@ INCLUDE_DIRECTORIES ( ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR} ${QT_INCLU
 
 SET(ROOT_PARALLEL_GUI_MPI_MOC_HDRS
    ${CMAKE_SOURCE_DIR}/include/RootParallelGuiMpiLauncher.h
+   ${CMAKE_SOURCE_DIR}/include/RootParallelGuiMpiConfig.h
 )
 
 SET(ROOT_PARALLEL_GUI_MPI_SRCS
    ${CMAKE_SOURCE_DIR}/src/RootParallelGuiMpiLauncher.cpp
+   ${CMAKE_SOURCE_DIR}/src/RootParallelGuiMpiConfig.cpp
    ${CMAKE_SOURCE_DIR}/src/RootParallelGuiCintMpi.cpp
 )
 
 SET(ROOT_PARALLEL_GUI_MPI_UIS
-   ${CMAKE_SOURCE_DIR}/uis/RootParallelGui/RootParallelGuiMpiLauncher.ui
+   ${CMAKE_SOURCE_DIR}/uis/RootParallelGuiMpi/RootParallelGuiMpiLauncher.ui
+   ${CMAKE_SOURCE_DIR}/uis/RootParallelGuiMpi/RootParallelGuiMpiConfig.ui
 )
 
 SET(ROOT_PARALLEL_GUI_MPI_RCS

@@ -38,6 +38,7 @@ bool isWritable(QString file)
 ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
 {
    setupUi(this);
+   InitResources();
    fMacro = NULL;
    connect(LaunchPushButton, SIGNAL(clicked()), this, SLOT(launch()));
    connect(StopPushButton, SIGNAL(clicked()), this, SLOT(stop()));
@@ -81,9 +82,6 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
 
    env = QProcessEnvironment::systemEnvironment();
    env.insert("PATH", env.value("PATH") + QString(RootPath + "\\bin"));
-
-   ;
-
 
 }
 
@@ -442,6 +440,7 @@ void ParallelGuiMpiLauncher::ParseOutput(QByteArray &output)
 
 }
 
-static void  InitResources(){
-     Q_INIT_RESOURCE(RootParallelGuiMpi);
+static void  InitResources()
+{
+   Q_INIT_RESOURCE(RootParallelGuiMpi);
 }

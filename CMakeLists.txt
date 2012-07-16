@@ -53,12 +53,13 @@ ENDIF()
 
 SET(ROOT_PARALLEL_GUI_SRC
 ${CMAKE_SOURCE_DIR}/src/RootParallelGui.cpp
+${CMAKE_SOURCE_DIR}/src/RootParallelGuiConfig.cpp
 ${CMAKE_SOURCE_DIR}/src/RootParallelGuiCint.cpp
 )
 
 SET(ROOT_PARALLEL_GUI_MOC_HDRS
 ${CMAKE_SOURCE_DIR}/include/RootParallelGui.h
-)
+${CMAKE_SOURCE_DIR}/include/RootParallelGuiConfig.h)
 
 SET(ROOT_PARALLEL_GUI_MPI_RCS
    ${CMAKE_SOURCE_DIR}/resources/RootParallelGui.qrc
@@ -66,6 +67,7 @@ SET(ROOT_PARALLEL_GUI_MPI_RCS
 
 SET(ROOT_PARALLEL_GUI_UIS
    ${CMAKE_SOURCE_DIR}/uis/RootParallelGui/RootParallelGui.ui
+   ${CMAKE_SOURCE_DIR}/uis/RootParallelGui/RootParallelGuiConfig.ui
 )
 
 

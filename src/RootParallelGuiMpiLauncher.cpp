@@ -19,6 +19,7 @@
 #include<iostream>
 #include<QFileInfo>
 #include<TTabCom.h>
+static void InitResources();
 
 using namespace ROOT;
 ClassImp(ParallelGuiMpiLauncher)
@@ -37,7 +38,6 @@ bool isWritable(QString file)
 ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
 {
    setupUi(this);
-//    Q_INIT_RESOURCE(ParallelGuiMpi);
    fMacro = NULL;
    connect(LaunchPushButton, SIGNAL(clicked()), this, SLOT(launch()));
    connect(StopPushButton, SIGNAL(clicked()), this, SLOT(stop()));
@@ -442,3 +442,6 @@ void ParallelGuiMpiLauncher::ParseOutput(QByteArray &output)
 
 }
 
+static void  InitResources(){
+     Q_INIT_RESOURCE(RootParallelGuiMpi);
+}

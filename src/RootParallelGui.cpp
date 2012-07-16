@@ -11,6 +11,7 @@
 * For the list of contributors see $ROOTSYS/README/CREDITS.              *
 *************************************************************************/
 #include<RootParallelGui.h>
+static void InitResources();
 
 using namespace ROOT;
 ClassImp(ParallelGui)
@@ -19,6 +20,7 @@ ParallelGui::ParallelGui(QMainWindow *parent): QMainWindow(parent)
 {
    setupUi(this);
 //    Q_INIT_RESOURCE(ParallelGui);
+   InitResources();
    connect(MpiLauncherPushButton, SIGNAL(clicked()), this, SLOT(showMpiLauncher()));
 }
 
@@ -46,3 +48,6 @@ void ParallelGui::closeMpiLauncher(ParallelGuiMpiLauncher* mpiLauncher)
    delete mpiLauncher;
 }
 
+static void  InitResources(){
+     Q_INIT_RESOURCE(RootParallelGui);
+}

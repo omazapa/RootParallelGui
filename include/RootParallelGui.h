@@ -46,7 +46,6 @@ namespace ROOT {
       ParallelGuiMpiLauncher *MpiLauncher;
       ClassDef(ParallelGui, 1) //
    };
-
 }
 
 #endif

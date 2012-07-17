@@ -73,6 +73,7 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Settings</string>
     </property>
+    <addaction name="actionConfiguration"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -250,6 +251,11 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Ouput Panel</string>
+   </property>
+  </action>
+  <action name="actionConfiguration">
+   <property name="text">
+    <string>Configuration</string>
    </property>
   </action>
  </widget>

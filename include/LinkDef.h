@@ -18,5 +18,6 @@
 
 #pragma link C++ namespace ROOT;
 #pragma link C++ class ROOT::ParallelGui;
+#pragma link C++ class ROOT::ParallelGuiConfig;
 
 #endif

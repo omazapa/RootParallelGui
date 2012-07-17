@@ -32,6 +32,7 @@ extern void G__set_cpp_environmentRootParallelGuiCint();
 #include "TObject.h"
 #include "TMemberInspector.h"
 #include "include/RootParallelGui.h"
+#include "include/RootParallelGuiConfig.h"
 #include <algorithm>
 namespace std { }
 using namespace std;
@@ -54,8 +55,13 @@ extern G__linked_taginfo G__RootParallelGuiCintLN_reverse_iteratorlEvectorlETVir
 extern G__linked_taginfo G__RootParallelGuiCintLN_Ui;
 extern G__linked_taginfo G__RootParallelGuiCintLN_UicLcLRootParallelGui;
 extern G__linked_taginfo G__RootParallelGuiCintLN_QMainWindow;
+extern G__linked_taginfo G__RootParallelGuiCintLN_ROOTcLcLParallelGuiConfig;
+extern G__linked_taginfo G__RootParallelGuiCintLN_QWidget;
 extern G__linked_taginfo G__RootParallelGuiCintLN_QString;
 extern G__linked_taginfo G__RootParallelGuiCintLN_ROOTcLcLParallelGuiMpiLauncher;
 extern G__linked_taginfo G__RootParallelGuiCintLN_ROOTcLcLParallelGui;
+extern G__linked_taginfo G__RootParallelGuiCintLN_QDialog;
+extern G__linked_taginfo G__RootParallelGuiCintLN_UicLcLRootParallelGuiConfig;
+extern G__linked_taginfo G__RootParallelGuiCintLN_ROOTcLcLParallelGuiMpiConfig;
 
 /* STUB derived class for protected member access */

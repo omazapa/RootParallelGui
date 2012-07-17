@@ -42,10 +42,7 @@ namespace ROOT {
    public:
       ParallelGuiMpiConfig(QWidget *parent = 0);
       ~ParallelGuiMpiConfig();
-   public slots:
-     void Apply();
-   private:
-      ClassDef(ParallelGuiMpiConfig, 1)
+//       ClassDef(ParallelGuiMpiConfig, 1)
    };
 }
 

@@ -19,19 +19,32 @@ ClassImp(ParallelGui)
 ParallelGui::ParallelGui(QMainWindow *parent): QMainWindow(parent)
 {
    setupUi(this);
-//    Q_INIT_RESOURCE(ParallelGui);
    InitResources();
    connect(MpiLauncherPushButton, SIGNAL(clicked()), this, SLOT(showMpiLauncher()));
+   connect(actionConfiguration,SIGNAL(triggered()),this,SLOT(showConfiguration()));
+   fMpiLauncher=NULL;
+   fConfigDialog=NULL;
 }
 
+ParallelGui::~ParallelGui()
+{
+  if(fMpiLauncher) delete fMpiLauncher;
+  if(fConfigDialog) delete fConfigDialog;
+}
 void ParallelGui::showMpiLauncher()
 {
-   MpiLauncher = new ParallelGuiMpiLauncher;
-   MpiLauncher->SetEmitOutput(true);
-   ModulesTabWidget->addTab(MpiLauncher, "Mpi Launcher");
-   connect(MpiLauncher, SIGNAL(closeme(ParallelGuiMpiLauncher*)), this, SLOT(closeMpiLauncher(ParallelGuiMpiLauncher*)));
-   connect(MpiLauncher, SIGNAL(sendOutput(QString)), this, SLOT(prepend(QString)));
-   ModulesTabWidget->setCurrentWidget(MpiLauncher);
+   fMpiLauncher = new ParallelGuiMpiLauncher();
+   fMpiLauncher->SetEmitOutput(true);
+   ModulesTabWidget->addTab(fMpiLauncher, "Mpi Launcher");
+   connect(fMpiLauncher, SIGNAL(closeme(ParallelGuiMpiLauncher*)), this, SLOT(closeMpiLauncher(ParallelGuiMpiLauncher*)));
+   connect(fMpiLauncher, SIGNAL(sendOutput(QString)), this, SLOT(prepend(QString)));
+   ModulesTabWidget->setCurrentWidget(fMpiLauncher);
+}
+
+void ParallelGui::showConfiguration()
+{
+  fConfigDialog=new ParallelGuiConfig();
+  fConfigDialog->exec();
 }
 
 void ParallelGui::prepend(QString msg)

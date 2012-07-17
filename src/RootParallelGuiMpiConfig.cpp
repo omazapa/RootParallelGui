@@ -21,7 +21,7 @@
 #include<TTabCom.h>
 
 using namespace ROOT;
-ClassImp(ParallelGuiMpiConfig)
+// ClassImp(ParallelGuiMpiConfig)
 //tmp utility function
 ParallelGuiMpiConfig::ParallelGuiMpiConfig(QWidget *parent): QDialog(parent)
 {

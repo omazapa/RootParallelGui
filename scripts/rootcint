@@ -18,7 +18,8 @@ CintRootParallelGuiMpiOutput="$CintSrcPath/RootParallelGuiCintMpi.cpp"
 
 #Headers to generate dictionaries#
 CintGuiHeaders[0]="$IncludePath/RootParallelGui.h"
-CintGuiHeaders[1]="$IncludePath/LinkDef.h"
+CintGuiHeaders[1]="$IncludePath/RootParallelGuiConfig.h"
+CintGuiHeaders[2]="$IncludePath/LinkDef.h"
 
 #Headers with mathematical algorithms#
 CintGuiMpiHeaders[0]="$IncludePath/RootParallelGuiMpiLauncher.h"

@@ -25,10 +25,19 @@ ClassImp(ParallelGuiConfig)
 //tmp utility function
 ParallelGuiConfig::ParallelGuiConfig(QWidget *parent): QDialog(parent)
 {
-   setupUi(this);
+  setupUi(this);
+  connect(RootMpiPushButton,SIGNAL(clicked()),this,SLOT(showRootMpiConfig()));
+  fMpiConfigWidget=new ParallelGuiMpiConfig();
 }
 
 ParallelGuiConfig::~ParallelGuiConfig()
 {
+  delete fMpiConfigWidget;
 }
 
+void ParallelGuiConfig::showRootMpiConfig()
+{
+  fMpiConfigWidget->setParent(PluginWidget);
+  frame->layout()->addWidget(fMpiConfigWidget);
+  fMpiConfigWidget->setVisible(true);
+}

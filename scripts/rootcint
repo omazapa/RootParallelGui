@@ -23,7 +23,8 @@ CintGuiHeaders[2]="$IncludePath/LinkDef.h"
 
 #Headers with mathematical algorithms#
 CintGuiMpiHeaders[0]="$IncludePath/RootParallelGuiMpiLauncher.h"
-CintGuiMpiHeaders[1]="$IncludePath/LinkDef_Mpi.h"
+CintGuiMpiHeaders[1]="$IncludePath/RootParallelGuiMpiConfig.h"
+CintGuiMpiHeaders[2]="$IncludePath/LinkDef_Mpi.h"
 
 #########################################################
 #generate dictionaries for parallelized math's libraries#

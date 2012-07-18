@@ -84,7 +84,7 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>View</string>
     </property>
-    <addaction name="actionOuput_Panel"/>
+    <addaction name="actionOuputPanel"/>
    </widget>
    <addaction name="menuQuit"/>
    <addaction name="menuView"/>
@@ -242,7 +242,7 @@ p, li { white-space: pre-wrap; }
     <string>Quit</string>
    </property>
   </action>
-  <action name="actionOuput_Panel">
+  <action name="actionOuputPanel">
    <property name="checkable">
     <bool>false</bool>
    </property>
@@ -280,7 +280,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>actionOuput_Panel</sender>
+   <sender>actionOuputPanel</sender>
    <signal>activated()</signal>
    <receiver>OuptutDockWidget</receiver>
    <slot>show()</slot>

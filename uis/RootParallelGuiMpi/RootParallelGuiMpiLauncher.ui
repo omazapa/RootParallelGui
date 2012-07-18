@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>688</width>
-    <height>496</height>
+    <width>704</width>
+    <height>664</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <normaloff>:/RootParallelGui/rootmpi-exe.png</normaloff>:/RootParallelGui/rootmpi-exe.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
-   <item row="1" column="8">
+   <item row="1" column="10">
     <widget class="QPushButton" name="ClosePushButton">
      <property name="text">
       <string>Close</string>
@@ -38,7 +38,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="9">
+   <item row="0" column="0" colspan="11">
     <widget class="QScrollArea" name="scrollArea">
      <property name="widgetResizable">
       <bool>true</bool>
@@ -48,8 +48,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>650</width>
-        <height>545</height>
+        <width>690</width>
+        <height>623</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -415,8 +415,8 @@ implicitly sets &quot;max_slots&quot; equal to the &quot;slots&quot; value for e
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>568</width>
-                   <height>505</height>
+                   <width>646</width>
+                   <height>473</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_11">
@@ -704,15 +704,109 @@ and will be deleted upon completion of the job.</string>
               </item>
              </layout>
             </widget>
+            <widget class="QWidget" name="tab_5">
+             <attribute name="title">
+              <string>Nodes</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_22">
+              <item row="0" column="0">
+               <widget class="QGroupBox" name="groupBox_11">
+                <property name="title">
+                 <string>Workers Nodes</string>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_21">
+                 <item row="0" column="0">
+                  <widget class="QComboBox" name="comboBox_2">
+                   <item>
+                    <property name="text">
+                     <string>Machine File</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Manual Insertion</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="lineEdit"/>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QToolButton" name="toolButton">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" rowspan="3" colspan="2">
+                  <widget class="QTableWidget" name="EnvironmentVariablesTableWidget_2">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Sunken</enum>
+                   </property>
+                   <property name="alternatingRowColors">
+                    <bool>true</bool>
+                   </property>
+                   <attribute name="horizontalHeaderStretchLastSection">
+                    <bool>true</bool>
+                   </attribute>
+                   <column>
+                    <property name="text">
+                     <string>Name or Ip address</string>
+                    </property>
+                   </column>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QToolButton" name="AddEnvironmentVariableToolButton_2">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>Add</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="2">
+                  <widget class="QToolButton" name="RemoveEnvironmentVariableToolButton_2">
+                   <property name="text">
+                    <string>Remove</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="2">
+                  <spacer name="verticalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>359</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
             <widget class="QWidget" name="tab_4">
              <attribute name="title">
-              <string>RootMpi</string>
+              <string>Root/Mpi</string>
              </attribute>
-             <layout class="QGridLayout" name="gridLayout_17">
+             <layout class="QGridLayout" name="gridLayout_20">
               <item row="0" column="0">
                <widget class="QGroupBox" name="groupBox_7">
                 <property name="title">
-                 <string>TMessage/Serizalization</string>
+                 <string>TMessage/Serialization</string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_16">
                  <item row="0" column="0">
@@ -760,16 +854,84 @@ and will be deleted upon completion of the job.</string>
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QGroupBox" name="groupBox_11">
-                <property name="toolTip">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;pre style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;Create an application environment. The application environment&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; provides an interface to the graphics system and eventloop&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; (be it X, Windoze, MacOS or BeOS). After creating the application&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; object start the eventloop by calling its &lt;/span&gt;&lt;a href=&quot;http://root.cern.ch/root/html532/TApplication.html#TApplication:Run&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#008000; background-color:#000000;&quot;&gt;Run&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;() method. The command&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; line options recogized by &lt;/span&gt;&lt;a href=&quot;http://root.cern.ch/root/html532/TApplication.html&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#336299; background-color:#000000;&quot;&gt;TApplication&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; are described in the &lt;/span&gt;&lt;a href=&quot;http://root.cern.ch/root/html532/TApplication.html#TApplication:GetOptions&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#336299; background-color:#000000;&quot;&gt;GetOptions&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;()&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; method. The recognized options are removed from the argument array.&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; The original list of argument options can be retrieved via the &lt;/span&gt;&lt;a href=&quot;http://root.cern.ch/root/html532/TApplication.html#TApplication:Argc&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#336299; background-color:#000000;&quot;&gt;Argc&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;()&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; and &lt;/span&gt;&lt;a href=&quot;http://root.cern.ch/root/html532/TApplication.html#TApplication:Argv&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#039915; background-color:#000000;&quot;&gt;Argv&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;() methods. The appClassName &lt;/span&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#008080; background-color:#000000;&quot;&gt;&amp;quot;proofserv&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; is reserved for the&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; PROOF system. The &lt;/span&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#008080; background-color:#000000;&quot;&gt;&amp;quot;options&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#008080; background-color:#000000;&quot;&gt;&amp;quot;numOptions&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; arguments are not used,&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; except if you want to by-pass the argv processing by &lt;/span&gt;&lt;a href=&quot;http://root.cern.ch/root/html532/TApplication.html#TApplication:GetOptions&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#336299; background-color:#000000;&quot;&gt;GetOptions&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;()&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; in which case you should specify numOptions&amp;lt;0. All options will&lt;/span&gt;&lt;/pre&gt;&lt;pre style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt; still be available via the &lt;/span&gt;&lt;a href=&quot;http://root.cern.ch/root/html532/TApplication.html#TApplication:Argv&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#336299; background-color:#000000;&quot;&gt;Argv&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;() method for later use.&lt;/span&gt;&lt;/pre&gt;&lt;p</string>
-                </property>
+               <widget class="QGroupBox" name="groupBox_8">
                 <property name="title">
-                 <string>TGApplication</string>
+                 <string>Basic ROOT Options (Just for Macros)</string>
                 </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
+                <layout class="QGridLayout" name="gridLayout_17">
+                 <item row="0" column="0">
+                  <widget class="QCheckBox" name="checkBox">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;run in batch mode without graphics&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>-b (Batch Mode)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QCheckBox" name="checkBox_8">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;do not show splash screen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>-l do not show splash screen</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QCheckBox" name="checkBox_2">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;do not execute logon and logoff macros as specified in .rootrc&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>-n not logon and logoff</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QCheckBox" name="checkBox_9">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;exit on exception&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>-x exit on exception</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QCheckBox" name="checkBox_3">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;exit after processing command line macro files&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>-q exit after processing</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QCheckBox" name="checkBox_7">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;run with memory usage monitoring&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>-memstat memory usage</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
               <item row="2" column="0">
@@ -998,7 +1160,7 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
-   <item row="1" column="7">
+   <item row="1" column="9">
     <widget class="QComboBox" name="VerboseQuietComboBox">
      <item>
       <property name="text">
@@ -1052,7 +1214,7 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
-   <item row="1" column="6">
+   <item row="1" column="7">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -1064,6 +1226,13 @@ p, li { white-space: pre-wrap; }
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="1" column="8">
+    <widget class="QToolButton" name="SessionToolButton">
+     <property name="text">
+      <string>Session</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

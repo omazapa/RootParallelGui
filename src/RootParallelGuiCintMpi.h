@@ -32,6 +32,7 @@ extern void G__set_cpp_environmentRootParallelGuiCintMpi();
 #include "TObject.h"
 #include "TMemberInspector.h"
 #include "include/RootParallelGuiMpiLauncher.h"
+#include "include/RootParallelGuiMpiConfig.h"
 #include <algorithm>
 namespace std { }
 using namespace std;
@@ -64,5 +65,8 @@ extern G__linked_taginfo G__RootParallelGuiCintMpiLN_Ui;
 extern G__linked_taginfo G__RootParallelGuiCintMpiLN_UicLcLRootParallelGuiMpiLauncher;
 extern G__linked_taginfo G__RootParallelGuiCintMpiLN_QProcesscLcLExitStatus;
 extern G__linked_taginfo G__RootParallelGuiCintMpiLN_ROOTcLcLParallelGuiMpiLauncher;
+extern G__linked_taginfo G__RootParallelGuiCintMpiLN_QDialog;
+extern G__linked_taginfo G__RootParallelGuiCintMpiLN_UicLcLRootParallelGuiMpiConfig;
+extern G__linked_taginfo G__RootParallelGuiCintMpiLN_ROOTcLcLParallelGuiMpiConfig;
 
 /* STUB derived class for protected member access */

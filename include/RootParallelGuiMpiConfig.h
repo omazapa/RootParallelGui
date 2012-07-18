@@ -22,12 +22,14 @@ class QDialog;
 class QByteArray;
 class QString;
 class QStringList;
+class QSettings;
 namespace Ui {
    class  RootParallelGuiMpiConfig;
 }
 #else
 #include<ui_RootParallelGuiMpiConfig.h>
 #include<QDialog>
+#include<QSettings>
 #endif
 
 namespace ROOT {
@@ -42,7 +44,12 @@ namespace ROOT {
    public:
       ParallelGuiMpiConfig(QWidget *parent = 0);
       ~ParallelGuiMpiConfig();
-//       ClassDef(ParallelGuiMpiConfig, 1)
+   protected slots:   
+      void GetRootMpiPath();
+      void Apply();
+   private:
+     QSettings *fConfigSettings;
+      ClassDef(ParallelGuiMpiConfig, 0)
    };
 }
 

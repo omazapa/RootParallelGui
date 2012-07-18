@@ -40,6 +40,13 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    setupUi(this);
    InitResources();
    fMacro = NULL;
+   fSessionMenu=new QMenu("Session");
+   fSessionSave=new QAction("Save",this);
+   fSessionLoad=new QAction("Load",this);
+   SessionToolButton->setMenu(fSessionMenu);
+   SessionToolButton->setPopupMode(QToolButton::MenuButtonPopup);
+   fSessionMenu->addAction(fSessionSave);
+   fSessionMenu->addAction(fSessionLoad);
    connect(LaunchPushButton, SIGNAL(clicked()), this, SLOT(launch()));
    connect(StopPushButton, SIGNAL(clicked()), this, SLOT(stop()));
    connect(ClosePushButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -70,7 +77,6 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    connect(RemoveEnvironmentVariableToolButton, SIGNAL(clicked()), this, SLOT(removeEnvironmentVariable()));
    bEmitOuput = false;
 
-
    connect(SaveToolButton, SIGNAL(clicked()), this, SLOT(saveMacro()));
    connect(MacroBinaryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setMacroBinaryMode(int)));
 
@@ -82,12 +88,14 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
 
    env = QProcessEnvironment::systemEnvironment();
    env.insert("PATH", env.value("PATH") + QString(RootPath + "\\bin"));
-
 }
 
 ParallelGuiMpiLauncher::~ParallelGuiMpiLauncher()
 {
    delete futureRunner;
+   delete fSessionLoad;
+   delete fSessionMenu;
+   delete fSessionSave;
 }
 
 void ParallelGuiMpiLauncher::getPath()
@@ -129,7 +137,7 @@ void ParallelGuiMpiLauncher::getPreloadFilesDestDir()
 
 void ParallelGuiMpiLauncher::addEnvironmentVariable()
 {
-   EnvironmentVariablesTableWidget->insertRow(0);
+   EnvironmentVariablesTableWidget->insertRow(EnvironmentVariablesTableWidget->rowCount());
 }
 
 void ParallelGuiMpiLauncher::removeEnvironmentVariable()
@@ -246,6 +254,13 @@ void ParallelGuiMpiLauncher::launch()
    if (EnvironmentVariablesGroupBox->isChecked()) {
       Int_t rows = EnvironmentVariablesTableWidget->rowCount();
       for (Int_t i = 0; i < rows; i++) {
+	QString fVariable=EnvironmentVariablesTableWidget->item(i,0)->text();
+	QString fValue=EnvironmentVariablesTableWidget->item(i,1)->text();
+	if(!fVariable.isEmpty())
+	{
+	  if(!fValue.isEmpty())  args<<"-x"<<fVariable+"="+fValue;
+	  else args<<"-x"<<fVariable;
+	}
       }
    }
 

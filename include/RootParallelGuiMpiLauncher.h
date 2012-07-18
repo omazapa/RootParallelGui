@@ -32,12 +32,14 @@ namespace Ui {
    class  RootParallelGuiMpiLauncher;
 }
 enum QProcess::ExitStatus;
+class QMenu;
 #else
 #include<ui_RootParallelGuiMpiLauncher.h>
 #include<QFutureWatcher>
 #include<QProcess>
 #include<QTimer>
 #include<QFile>
+#include<QMenu>
 #endif
 
 namespace ROOT {
@@ -48,7 +50,21 @@ namespace ROOT {
    private:
       ParallelGuiMpiLauncher(const ParallelGuiMpiLauncher &);
       ParallelGuiMpiLauncher& operator=(const ParallelGuiMpiLauncher &);
-
+      QMenu *fSessionMenu;//menu for toolbutton save/load sessions
+      QAction *fSessionSave;//save action for session menu
+      QAction *fSessionLoad;//load action for session menu
+      QFutureWatcher<void> *futureRunner;
+      QProcess *process;
+      QString MpiRunPath;
+      QString RootPath;
+      QTimer *timer;
+      Q_PID pid;
+      QStringList args;
+      QStringList rootArgs;
+      Bool_t bEmitOuput;
+      QFile *fMacro;
+      QProcessEnvironment env;
+      
    public:
       ParallelGuiMpiLauncher(QWidget *parent = 0);
       ~ParallelGuiMpiLauncher();
@@ -87,17 +103,6 @@ namespace ROOT {
       void closeme(ParallelGuiMpiLauncher*);
       void sendOutput(QString);
    private:
-      QFutureWatcher<void> *futureRunner;
-      QProcess *process;
-      QString MpiRunPath;
-      QString RootPath;
-      QTimer *timer;
-      Q_PID pid;
-      QStringList args;
-      QStringList rootArgs;
-      Bool_t bEmitOuput;
-      QFile *fMacro;
-      QProcessEnvironment env;
       ClassDef(ParallelGuiMpiLauncher, 1)
    };
 }

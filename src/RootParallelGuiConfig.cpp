@@ -41,3 +41,5 @@ void ParallelGuiConfig::showRootMpiConfig()
   frame->layout()->addWidget(fMpiConfigWidget);
   fMpiConfigWidget->setVisible(true);
 }
+
+

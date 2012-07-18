@@ -21,14 +21,29 @@
 #include<TTabCom.h>
 
 using namespace ROOT;
-// ClassImp(ParallelGuiMpiConfig)
+ClassImp(ParallelGuiMpiConfig)
 //tmp utility function
 ParallelGuiMpiConfig::ParallelGuiMpiConfig(QWidget *parent): QDialog(parent)
 {
    setupUi(this);
+   connect(RootMpiPathToolButton,SIGNAL(clicked()),this,SLOT(GetRootMpiPath()));
+   fConfigSettings=new QSettings("root","ParallelGuiMpiConfig");
 }
 
 ParallelGuiMpiConfig::~ParallelGuiMpiConfig()
 {
+  
+}
+
+void ParallelGuiMpiConfig::GetRootMpiPath()
+{
+    QString sFilePath=QFileDialog::getOpenFileName(this);
+    if(!sFilePath.isNull()) RootMpiPathLineEdit->setText(sFilePath); 
+}
+
+void ParallelGuiMpiConfig::Apply()
+{
+fConfigSettings->setValue("RootMpiCommandPath",RootMpiPathLineEdit->text());
+fConfigSettings->sync();
 }
 

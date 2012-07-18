@@ -18,4 +18,5 @@
 
 #pragma link C++ namespace ROOT;
 #pragma link C++ class ROOT::ParallelGuiMpiLauncher+;
+#pragma link C++ class ROOT::ParallelGuiMpiConfig+;
 #endif

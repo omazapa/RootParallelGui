@@ -22,6 +22,9 @@ ParallelGui::ParallelGui(QMainWindow *parent): QMainWindow(parent)
    InitResources();
    connect(MpiLauncherPushButton, SIGNAL(clicked()), this, SLOT(showMpiLauncher()));
    connect(actionConfiguration,SIGNAL(triggered()),this,SLOT(showConfiguration()));
+   connect(actionOuputPanel,SIGNAL(triggered()),OuptutDockWidget,SLOT(show()));
+    
+
    fMpiLauncher=NULL;
    fConfigDialog=NULL;
 }

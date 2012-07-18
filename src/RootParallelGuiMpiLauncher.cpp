@@ -303,7 +303,7 @@ void ParallelGuiMpiLauncher::launch()
 	  QString sMachineFile=MachinesLineEdit->text();
 	  if(!sMachineFile.isEmpty()){args<<"-machinefile"<<sMachineFile;}
 	  else{
-	    QMessageBox::critical(this,"Error in tab Nodes","Enabled option machinefile but not specified.");
+	    QMessageBox::critical(this,"Error in tab Nodes","Enabled option machinefile, but not specified.");
 	    return;
 	  }
 	}else{
@@ -324,6 +324,38 @@ void ParallelGuiMpiLauncher::launch()
 	  args<<sNodes;
 	}
       }
+     /************************************** 
+      *Basic ROOT Options (Just for Macros)*
+      **************************************/
+      if(MacroBinaryComboBox->currentIndex()==0){
+	if(bCheckBox->isChecked()){
+	rootArgs<<"-b";	  
+	}
+
+	if(nCheckBox->isChecked()){
+	rootArgs<<"-n";	  
+	}
+	
+	if(qCheckBox->isChecked()){
+	rootArgs<<"-q";	  
+	}
+
+	if(nCheckBox->isChecked()){
+	rootArgs<<"-n";	  
+	}
+
+	if(lCheckBox->isChecked()){
+	rootArgs<<"-l";	  
+	}
+
+	if(xCheckBox->isChecked()){
+	rootArgs<<"-x";	  
+	}
+
+	if(memstatCheckBox->isChecked()){
+	rootArgs<<"-memstat";	  
+	}
+      }
 //
 //     if(HeteroCheckBox->isChecked()){
 //       args<<"--hetero";
@@ -340,9 +372,9 @@ void ParallelGuiMpiLauncher::launch()
 #endif
    if (MacroBinaryComboBox->currentIndex() == 0) {
 #ifdef _WIN32
-      args << "root.exe" << "-q" << "-l" << "-x";
+      args << "root.exe" <<rootArgs;
 #else
-      args << "root" << "-q" << "-l" << "-x";
+      args << "root" << rootArgs;
 #endif
    }
    args << ExecutableLineEdit->text();
@@ -489,9 +521,11 @@ void ParallelGuiMpiLauncher::saveMacro()
 void ParallelGuiMpiLauncher::setMacroBinaryMode(int mode)
 {
    if (mode == 0) {
-      tabWidget->setTabEnabled(4, true);
+      tabWidget->setTabEnabled(5, true);
+      RootOptionsGroupBox->setEnabled(true);
    } else {
-      tabWidget->setTabEnabled(4, false);
+      tabWidget->setTabEnabled(5, false);
+      RootOptionsGroupBox->setEnabled(false);
    }
 }
 

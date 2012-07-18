@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>704</width>
-    <height>664</height>
+    <height>488</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,8 +48,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>690</width>
-        <height>623</height>
+        <width>675</width>
+        <height>513</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -111,7 +111,7 @@
           <item row="0" column="0">
            <widget class="QTabWidget" name="tabWidget">
             <property name="currentIndex">
-             <number>2</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -415,8 +415,8 @@ implicitly sets &quot;max_slots&quot; equal to the &quot;slots&quot; value for e
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>646</width>
-                   <height>473</height>
+                   <width>616</width>
+                   <height>432</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_11">
@@ -819,8 +819,11 @@ and will be deleted upon completion of the job.</string>
              <layout class="QGridLayout" name="gridLayout_20">
               <item row="0" column="0">
                <widget class="QGroupBox" name="groupBox_7">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="title">
-                 <string>TMessage/Serialization</string>
+                 <string>TMessage/Serialization(no implemented yet)</string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_16">
                  <item row="0" column="0">
@@ -868,13 +871,13 @@ and will be deleted upon completion of the job.</string>
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QGroupBox" name="groupBox_8">
+               <widget class="QGroupBox" name="RootOptionsGroupBox">
                 <property name="title">
                  <string>Basic ROOT Options (Just for Macros)</string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_17">
                  <item row="0" column="0">
-                  <widget class="QCheckBox" name="checkBox">
+                  <widget class="QCheckBox" name="bCheckBox">
                    <property name="toolTip">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;run in batch mode without graphics&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
@@ -884,7 +887,7 @@ and will be deleted upon completion of the job.</string>
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QCheckBox" name="checkBox_8">
+                  <widget class="QCheckBox" name="lCheckBox">
                    <property name="toolTip">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;do not show splash screen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
@@ -897,7 +900,7 @@ and will be deleted upon completion of the job.</string>
                   </widget>
                  </item>
                  <item row="1" column="0">
-                  <widget class="QCheckBox" name="checkBox_2">
+                  <widget class="QCheckBox" name="nCheckBox">
                    <property name="toolTip">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;do not execute logon and logoff macros as specified in .rootrc&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
@@ -910,7 +913,7 @@ and will be deleted upon completion of the job.</string>
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QCheckBox" name="checkBox_9">
+                  <widget class="QCheckBox" name="xCheckBox">
                    <property name="toolTip">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;exit on exception&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
@@ -923,7 +926,7 @@ and will be deleted upon completion of the job.</string>
                   </widget>
                  </item>
                  <item row="2" column="0">
-                  <widget class="QCheckBox" name="checkBox_3">
+                  <widget class="QCheckBox" name="qCheckBox">
                    <property name="toolTip">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;exit after processing command line macro files&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
@@ -936,7 +939,7 @@ and will be deleted upon completion of the job.</string>
                   </widget>
                  </item>
                  <item row="2" column="1">
-                  <widget class="QCheckBox" name="checkBox_7">
+                  <widget class="QCheckBox" name="memstatCheckBox">
                    <property name="toolTip">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;run with memory usage monitoring&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>

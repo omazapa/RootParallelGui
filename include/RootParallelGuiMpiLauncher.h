@@ -99,6 +99,7 @@ namespace ROOT {
       //index 0 macro mode and 1 binary mode
       void setMacroBinaryMode(int);
       void NodesSourceChanged(int);
+      void getMachineFile();
    protected:
       void runProcess();
       void ParseOutput(QByteArray &output);

@@ -745,27 +745,6 @@ and will be deleted upon completion of the job.</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0" rowspan="3" colspan="2">
-                  <widget class="QTableWidget" name="NodesTableWidget">
-                   <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Sunken</enum>
-                   </property>
-                   <property name="alternatingRowColors">
-                    <bool>true</bool>
-                   </property>
-                   <attribute name="horizontalHeaderStretchLastSection">
-                    <bool>true</bool>
-                   </attribute>
-                   <column>
-                    <property name="text">
-                     <string>Name or Ip address</string>
-                    </property>
-                   </column>
-                  </widget>
-                 </item>
                  <item row="1" column="2">
                   <widget class="QToolButton" name="AddNodeToolButton">
                    <property name="sizePolicy">
@@ -776,13 +755,6 @@ and will be deleted upon completion of the job.</string>
                    </property>
                    <property name="text">
                     <string>Add</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="2">
-                  <widget class="QToolButton" name="RemoveNodeToolButton">
-                   <property name="text">
-                    <string>Remove</string>
                    </property>
                   </widget>
                  </item>
@@ -798,6 +770,42 @@ and will be deleted upon completion of the job.</string>
                     </size>
                    </property>
                   </spacer>
+                 </item>
+                 <item row="2" column="2">
+                  <widget class="QToolButton" name="RemoveNodeToolButton">
+                   <property name="text">
+                    <string>Remove</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" rowspan="3" colspan="2">
+                  <widget class="QTableWidget" name="NodesTableWidget">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Sunken</enum>
+                   </property>
+                   <property name="alternatingRowColors">
+                    <bool>true</bool>
+                   </property>
+                   <attribute name="horizontalHeaderDefaultSectionSize">
+                    <number>160</number>
+                   </attribute>
+                   <attribute name="horizontalHeaderStretchLastSection">
+                    <bool>true</bool>
+                   </attribute>
+                   <column>
+                    <property name="text">
+                     <string>Name or Ip address</string>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Slots(Cpus)</string>
+                    </property>
+                   </column>
+                  </widget>
                  </item>
                 </layout>
                </widget>

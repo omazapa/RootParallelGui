@@ -84,6 +84,7 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
     *To specify which hosts (nodes) of the cluster to run on: *
     ***********************************************************/
    connect(AddNodeToolButton, SIGNAL(clicked()), this, SLOT(addNode()));
+   connect(MarchineFileToolButton, SIGNAL(clicked()), this, SLOT(getMachineFile()));
    connect(RemoveNodeToolButton, SIGNAL(clicked()), this, SLOT(removeNode()));
    connect(NodesSourceComboBox,SIGNAL(currentIndexChanged (int)),this,SLOT(NodesSourceChanged(int)));
    NodesTableWidget->setEnabled(false);
@@ -106,6 +107,10 @@ ParallelGuiMpiLauncher::~ParallelGuiMpiLauncher()
    delete fSessionLoad;
    delete fSessionMenu;
    delete fSessionSave;
+}
+void ParallelGuiMpiLauncher::getMachineFile(){
+    QString sFilePath=QFileDialog::getOpenFileName(this);
+    if(!sFilePath.isNull()) MachinesLineEdit->setText(sFilePath); 
 }
 
 void ParallelGuiMpiLauncher::NodesSourceChanged(int index)
@@ -302,7 +307,21 @@ void ParallelGuiMpiLauncher::launch()
 	    return;
 	  }
 	}else{
-	  
+	  int rows=NodesTableWidget->rowCount();
+	  if(rows>0) args<<"-H";
+	  QString sNodes;
+	  for(int i=0;i<rows;i++)
+	  {
+	    QString sNode=NodesTableWidget->item(i,0)->text();
+	    int     iSlots=static_cast<QSpinBox*>(NodesTableWidget->cellWidget(i,1))->value();
+	    if(!sNode.isEmpty()){
+	      for(int j=0;j<iSlots;j++){
+		sNodes+=sNode;
+		if(j<(iSlots-1)) sNodes+=",";
+	      }
+	    }
+	  }
+	  args<<sNodes;
 	}
       }
 //
@@ -420,7 +439,7 @@ void ParallelGuiMpiLauncher::stop()
    timer->stop();
    process->kill();
    futureRunner->cancel();
-//     delete process;
+
 }
 
 
@@ -498,7 +517,11 @@ void ParallelGuiMpiLauncher::ParseOutput(QByteArray &output)
 
 void ParallelGuiMpiLauncher::addNode()
 {
-   NodesTableWidget->insertRow(NodesTableWidget->rowCount());  
+   NodesTableWidget->insertRow(NodesTableWidget->rowCount()); 
+   QSpinBox *fNodes=new QSpinBox;
+   fNodes->setMinimum(1);
+   fNodes->setMaximum(99);
+   NodesTableWidget->setCellWidget(NodesTableWidget->rowCount()-1,1,fNodes);
 }
 
 void ParallelGuiMpiLauncher::removeNode()

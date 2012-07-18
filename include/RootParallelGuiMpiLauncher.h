@@ -93,9 +93,12 @@ namespace ROOT {
       void getPreloadFilesDestDir();
       void addEnvironmentVariable();
       void removeEnvironmentVariable();
+      void addNode();
+      void removeNode();
       void saveMacro();
       //index 0 macro mode and 1 binary mode
       void setMacroBinaryMode(int);
+      void NodesSourceChanged(int);
    protected:
       void runProcess();
       void ParseOutput(QByteArray &output);

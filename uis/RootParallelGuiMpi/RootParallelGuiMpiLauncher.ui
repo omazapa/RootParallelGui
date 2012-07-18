@@ -111,7 +111,7 @@
           <item row="0" column="0">
            <widget class="QTabWidget" name="tabWidget">
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -710,13 +710,19 @@ and will be deleted upon completion of the job.</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_22">
               <item row="0" column="0">
-               <widget class="QGroupBox" name="groupBox_11">
+               <widget class="QGroupBox" name="NodesGroupBox">
                 <property name="title">
-                 <string>Workers Nodes</string>
+                 <string>Worker Nodes</string>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+                <property name="checked">
+                 <bool>false</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_21">
                  <item row="0" column="0">
-                  <widget class="QComboBox" name="comboBox_2">
+                  <widget class="QComboBox" name="NodesSourceComboBox">
                    <item>
                     <property name="text">
                      <string>Machine File</string>
@@ -730,17 +736,17 @@ and will be deleted upon completion of the job.</string>
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit"/>
+                  <widget class="QLineEdit" name="MachinesLineEdit"/>
                  </item>
                  <item row="0" column="2">
-                  <widget class="QToolButton" name="toolButton">
+                  <widget class="QToolButton" name="MarchineFileToolButton">
                    <property name="text">
                     <string>...</string>
                    </property>
                   </widget>
                  </item>
                  <item row="1" column="0" rowspan="3" colspan="2">
-                  <widget class="QTableWidget" name="EnvironmentVariablesTableWidget_2">
+                  <widget class="QTableWidget" name="NodesTableWidget">
                    <property name="frameShape">
                     <enum>QFrame::StyledPanel</enum>
                    </property>
@@ -761,7 +767,7 @@ and will be deleted upon completion of the job.</string>
                   </widget>
                  </item>
                  <item row="1" column="2">
-                  <widget class="QToolButton" name="AddEnvironmentVariableToolButton_2">
+                  <widget class="QToolButton" name="AddNodeToolButton">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -774,7 +780,7 @@ and will be deleted upon completion of the job.</string>
                   </widget>
                  </item>
                  <item row="2" column="2">
-                  <widget class="QToolButton" name="RemoveEnvironmentVariableToolButton_2">
+                  <widget class="QToolButton" name="RemoveNodeToolButton">
                    <property name="text">
                     <string>Remove</string>
                    </property>

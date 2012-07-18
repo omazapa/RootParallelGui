@@ -80,6 +80,16 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    connect(SaveToolButton, SIGNAL(clicked()), this, SLOT(saveMacro()));
    connect(MacroBinaryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setMacroBinaryMode(int)));
 
+   /***********************************************************
+    *To specify which hosts (nodes) of the cluster to run on: *
+    ***********************************************************/
+   connect(AddNodeToolButton, SIGNAL(clicked()), this, SLOT(addNode()));
+   connect(RemoveNodeToolButton, SIGNAL(clicked()), this, SLOT(removeNode()));
+   connect(NodesSourceComboBox,SIGNAL(currentIndexChanged (int)),this,SLOT(NodesSourceChanged(int)));
+   NodesTableWidget->setEnabled(false);
+   AddNodeToolButton->setEnabled(false);
+   RemoveNodeToolButton->setEnabled(false);
+
 #ifdef _WIN32
    RootPath = "C:\\root";
 #else
@@ -96,6 +106,23 @@ ParallelGuiMpiLauncher::~ParallelGuiMpiLauncher()
    delete fSessionLoad;
    delete fSessionMenu;
    delete fSessionSave;
+}
+
+void ParallelGuiMpiLauncher::NodesSourceChanged(int index)
+{
+  if(index==0){
+    MachinesLineEdit->setEnabled(true);
+    MarchineFileToolButton->setEnabled(true);
+    NodesTableWidget->setEnabled(false);
+    AddNodeToolButton->setEnabled(false);
+    RemoveNodeToolButton->setEnabled(false);
+  }else{
+    MachinesLineEdit->setEnabled(false);
+    MarchineFileToolButton->setEnabled(false);
+    NodesTableWidget->setEnabled(true);
+    AddNodeToolButton->setEnabled(true);
+    RemoveNodeToolButton->setEnabled(true);
+  }
 }
 
 void ParallelGuiMpiLauncher::getPath()
@@ -263,7 +290,21 @@ void ParallelGuiMpiLauncher::launch()
 	}
       }
    }
-
+   /***********************************************************
+    *To specify which hosts (nodes) of the cluster to run on: *
+    ***********************************************************/
+      if(NodesGroupBox->isChecked()){
+        if(NodesSourceComboBox->currentIndex()==0){
+	  QString sMachineFile=MachinesLineEdit->text();
+	  if(!sMachineFile.isEmpty()){args<<"-machinefile"<<sMachineFile;}
+	  else{
+	    QMessageBox::critical(this,"Error in tab Nodes","Enabled option machinefile but not specified.");
+	    return;
+	  }
+	}else{
+	  
+	}
+      }
 //
 //     if(HeteroCheckBox->isChecked()){
 //       args<<"--hetero";
@@ -453,6 +494,16 @@ void ParallelGuiMpiLauncher::ParseOutput(QByteArray &output)
 
    output.replace("\033[00m", "</span>");
 
+}
+
+void ParallelGuiMpiLauncher::addNode()
+{
+   NodesTableWidget->insertRow(NodesTableWidget->rowCount());  
+}
+
+void ParallelGuiMpiLauncher::removeNode()
+{
+   NodesTableWidget->removeRow(NodesTableWidget->currentRow());  
 }
 
 static void  InitResources()

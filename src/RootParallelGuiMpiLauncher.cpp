@@ -19,6 +19,7 @@
 #include<iostream>
 #include<QFileInfo>
 #include<TTabCom.h>
+
 static void InitResources();
 
 using namespace ROOT;
@@ -43,6 +44,7 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    fSessionMenu = new QMenu("Session");
    fSessionSave = new QAction("Save", this);
    fSessionLoad = new QAction("Load", this);
+   fHighLihgter = new ROOT::ParallelGuiMacroHighlighter(MacroTextEdit->document());
    SessionToolButton->setMenu(fSessionMenu);
    SessionToolButton->setPopupMode(QToolButton::MenuButtonPopup);
    fSessionMenu->addAction(fSessionSave);
@@ -51,8 +53,8 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    connect(StopPushButton, SIGNAL(clicked()), this, SLOT(stop()));
    connect(ClosePushButton, SIGNAL(clicked()), this, SLOT(close()));
    connect(GetExecutableToolButton, SIGNAL(clicked()), this, SLOT(getExecutable()));
-   connect(GetCartoFileToolButton,SIGNAL(clicked()),this,SLOT(getCartoFile()));
-   
+   connect(GetCartoFileToolButton, SIGNAL(clicked()), this, SLOT(getCartoFile()));
+
    timer = new QTimer(this);
    connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
 
@@ -108,6 +110,7 @@ ParallelGuiMpiLauncher::~ParallelGuiMpiLauncher()
    delete fSessionLoad;
    delete fSessionMenu;
    delete fSessionSave;
+   delete fHighLihgter;
 }
 
 void ParallelGuiMpiLauncher::getMachineFile()
@@ -394,30 +397,30 @@ void ParallelGuiMpiLauncher::launch()
          return;
       }
    }
-    if(AbortedCheckBox->isChecked()){
-      args<<"-aborted"<<QVariant::fromValue<int>(AbortedSpinBox->value()).toString();
-    }   
+   if (AbortedCheckBox->isChecked()) {
+      args << "-aborted" << QVariant::fromValue<int>(AbortedSpinBox->value()).toString();
+   }
 
-    if (DebugCheckBox->isChecked()) {
+   if (DebugCheckBox->isChecked()) {
       args << "-debug";
    }
-    if (DebugLevelCheckBox->isChecked()) {
+   if (DebugLevelCheckBox->isChecked()) {
       args << "--debug-devel";
    }
-    if(DebugDaemonsCheckBox->isChecked()){
-      args<<"--debug-daemons";
-    }
-    if(DebugDaemosFileCheckBox->isChecked()){
-      args<<"--debug-daemons-file";
-    }
-    if(LaunchAgentCheckBox->isChecked()){
-      args<<"-launch-agent";
-    }
-    if(NoPrefixCheckBox->isChecked()){
-      args<<"--noprefix";
-    }
+   if (DebugDaemonsCheckBox->isChecked()) {
+      args << "--debug-daemons";
+   }
+   if (DebugDaemosFileCheckBox->isChecked()) {
+      args << "--debug-daemons-file";
+   }
+   if (LaunchAgentCheckBox->isChecked()) {
+      args << "-launch-agent";
+   }
+   if (NoPrefixCheckBox->isChecked()) {
+      args << "--noprefix";
+   }
 
-    if (VerboseQuietComboBox->currentIndex() == 0) {
+   if (VerboseQuietComboBox->currentIndex() == 0) {
       args << "-v";
    } else {
       args << "-q";
@@ -580,10 +583,10 @@ void ParallelGuiMpiLauncher::setMacroBinaryMode(int mode)
       tabWidget->setTabEnabled(5, true);
       RootOptionsGroupBox->setEnabled(true);
    } else {
-      if(fMacro){
-	delete fMacro;
-	fMacro=NULL;
-      } 
+      if (fMacro) {
+         delete fMacro;
+         fMacro = NULL;
+      }
       tabWidget->setTabEnabled(5, false);
       RootOptionsGroupBox->setEnabled(false);
    }

@@ -43,12 +43,14 @@ LINK_DIRECTORIES( ${MPI_LIBRARY_DIRS} "${ROOTSYS}/lib/root" "${ROOTSYS}/lib")
 SET(CMAKE_INSTALL_PREFIX ${ROOTSYS})
 
 
+INCLUDE(${CMAKE_SOURCE_DIR}/cmake/RootParallelGuiMacroEditor.cmake)
 
 SET(ROOT_PARALLEL_GUI_MPI True)
 
 IF(ROOT_PARALLEL_GUI_MPI)
 INCLUDE(${CMAKE_SOURCE_DIR}/cmake/RootParallelGuiMpi.cmake)
 ENDIF()
+
 
 
 SET(ROOT_PARALLEL_GUI_SRC
@@ -59,7 +61,8 @@ ${CMAKE_SOURCE_DIR}/src/RootParallelGuiCint.cpp
 
 SET(ROOT_PARALLEL_GUI_MOC_HDRS
 ${CMAKE_SOURCE_DIR}/include/RootParallelGui.h
-${CMAKE_SOURCE_DIR}/include/RootParallelGuiConfig.h)
+${CMAKE_SOURCE_DIR}/include/RootParallelGuiConfig.h
+)
 
 SET(ROOT_PARALLEL_GUI_MPI_RCS
    ${CMAKE_SOURCE_DIR}/resources/RootParallelGui.qrc
@@ -107,7 +110,7 @@ ADD_EXECUTABLE(RootParallelGui
 ${ROOT_PARALLEL_GUI_MAIN_SRCS}
 )
 
-TARGET_LINK_LIBRARIES(RootParallelGui ParallelGuiStatic ParallelGuiMpiStatic ${ROOT_LIBS} ${QT_LIBRARIES})
+TARGET_LINK_LIBRARIES(RootParallelGui ParallelGuiStatic ParallelGuiMpiStatic ParallelGuiMacroEditorStatic  ${ROOT_LIBS} ${QT_LIBRARIES})
 
 MINSTALLTARGET("LIB" ParallelGui)
 MINSTALLTARGET("BIN" RootParallelGui)

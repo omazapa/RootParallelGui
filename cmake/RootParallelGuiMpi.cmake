@@ -1,7 +1,7 @@
 #/***************************************************************************
 #*   Copyright (C) by Omar Andres Zapata Mesa                               *
 #*   email:andresete.chaos@gmail.com                                        *
-#*   Orbital Mechanics Group                                                *
+#*                                                                          *
 #*   Grupo de Fenomenologia de Interacciones Fundamentales                  *
 #*   Universidad de Antioquia At Medellin - Colombia                        *
 #*                                                                          *
@@ -13,6 +13,8 @@
 #######################
 
 INCLUDE_DIRECTORIES ( ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR} ${QT_INCLUDES} )
+
+ADD_DEFINITIONS(-fPIC)
 
 SET(ROOT_PARALLEL_GUI_MPI_MOC_HDRS
    ${CMAKE_SOURCE_DIR}/include/RootParallelGuiMpiLauncher.h
@@ -60,6 +62,7 @@ ${ROOT_PARALLEL_GUI_MPI_SRCS}
 ${ROOT_PARALLEL_GUI_MPI_RCS_SRCS}
 )
 
-TARGET_LINK_LIBRARIES(ParallelGuiMpi ${ROOT_LIBS} ${QT_LIBRARIES})
+TARGET_LINK_LIBRARIES(ParallelGuiMpi ParallelGuiMacroEditorStatic ${ROOT_LIBS} ${QT_LIBRARIES})
+ADD_DEPENDENCIES(ParallelGuiMpi ParallelGuiMacroEditorStatic)
 
 MINSTALLTARGET("LIB" ParallelGuiMpi)

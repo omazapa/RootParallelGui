@@ -34,8 +34,12 @@ namespace Ui {
 }
 enum QProcess::ExitStatus;
 class QMenu;
+namespace ROOT {
+   class ParallelGuiMacroHighlighter;
+}
 #else
 #include<ui_RootParallelGuiMpiLauncher.h>
+#include<RootParallelGuiMacroHighlighter.h>
 #include<QFutureWatcher>
 #include<QProcess>
 #include<QTimer>
@@ -65,6 +69,7 @@ namespace ROOT {
       Bool_t bEmitOuput;
       QFile *fMacro;
       QProcessEnvironment env;
+      ParallelGuiMacroHighlighter *fHighLihgter;//color for macros in editor
 
    public:
       ParallelGuiMpiLauncher(QWidget *parent = 0);

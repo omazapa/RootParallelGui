@@ -26,24 +26,24 @@ ClassImp(ParallelGuiMpiConfig)
 ParallelGuiMpiConfig::ParallelGuiMpiConfig(QWidget *parent): QDialog(parent)
 {
    setupUi(this);
-   connect(RootMpiPathToolButton,SIGNAL(clicked()),this,SLOT(GetRootMpiPath()));
-   fConfigSettings=new QSettings("root","ParallelGuiMpiConfig");
+   connect(RootMpiPathToolButton, SIGNAL(clicked()), this, SLOT(GetRootMpiPath()));
+   fConfigSettings = new QSettings("root", "ParallelGuiMpiConfig");
 }
 
 ParallelGuiMpiConfig::~ParallelGuiMpiConfig()
 {
-  
+
 }
 
 void ParallelGuiMpiConfig::GetRootMpiPath()
 {
-    QString sFilePath=QFileDialog::getOpenFileName(this);
-    if(!sFilePath.isNull()) RootMpiPathLineEdit->setText(sFilePath); 
+   QString sFilePath = QFileDialog::getOpenFileName(this);
+   if (!sFilePath.isNull()) RootMpiPathLineEdit->setText(sFilePath);
 }
 
 void ParallelGuiMpiConfig::Apply()
 {
-fConfigSettings->setValue("RootMpiCommandPath",RootMpiPathLineEdit->text());
-fConfigSettings->sync();
+   fConfigSettings->setValue("RootMpiCommandPath", RootMpiPathLineEdit->text());
+   fConfigSettings->sync();
 }
 

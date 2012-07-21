@@ -111,7 +111,7 @@
           <item row="0" column="0">
            <widget class="QTabWidget" name="tabWidget">
             <property name="currentIndex">
-             <number>3</number>
+             <number>4</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -814,7 +814,7 @@ and will be deleted upon completion of the job.</string>
             </widget>
             <widget class="QWidget" name="tab_4">
              <attribute name="title">
-              <string>Root/Mpi</string>
+              <string>ROOT</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_20">
               <item row="0" column="0">
@@ -968,13 +968,13 @@ and will be deleted upon completion of the job.</string>
             </widget>
             <widget class="QWidget" name="tab_3">
              <attribute name="title">
-              <string>Debug/Developers</string>
+              <string>Others/Debug</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_15">
               <item row="0" column="0">
                <widget class="QGroupBox" name="groupBox_10">
                 <property name="title">
-                 <string>Developer </string>
+                 <string>Others</string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_13">
                  <item row="0" column="0">
@@ -987,8 +987,8 @@ and will be deleted upon completion of the job.</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0" colspan="3">
-                  <widget class="QCheckBox" name="checkBox_17">
+                 <item row="1" column="0" colspan="2">
+                  <widget class="QCheckBox" name="LeaveSessionAttachedCheckBox">
                    <property name="toolTip">
                     <string>Do not detach OmpiRTE daemons used by this application. This allows error messages from the daemons as well as the underlying environment (e.g., when failing to launch a daemon) to be output.</string>
                    </property>
@@ -998,7 +998,7 @@ and will be deleted upon completion of the job.</string>
                   </widget>
                  </item>
                  <item row="2" column="0">
-                  <widget class="QCheckBox" name="checkBox_19">
+                  <widget class="QCheckBox" name="WaitForServerCheckBox">
                    <property name="toolTip">
                     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -1011,8 +1011,8 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1" colspan="2">
-                  <widget class="QCheckBox" name="checkBox_20">
+                 <item row="2" column="1">
+                  <widget class="QCheckBox" name="SeverWaitTimeCheckBox">
                    <property name="toolTip">
                     <string>The max amount of time (in seconds) mpirun should wait for the ompi-server to start. The default is 10 seconds.</string>
                    </property>
@@ -1021,8 +1021,8 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="3">
-                  <widget class="QSpinBox" name="spinBox_5">
+                 <item row="2" column="2" colspan="2">
+                  <widget class="QSpinBox" name="SeverWaitTimeSpinBox">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
@@ -1041,7 +1041,7 @@ p, li { white-space: pre-wrap; }
                   </widget>
                  </item>
                  <item row="3" column="0">
-                  <widget class="QCheckBox" name="checkBox_21">
+                  <widget class="QCheckBox" name="OMpiServerCheckBox">
                    <property name="toolTip">
                     <string>Specify the URI of the Open MPI server, or the name of the file (specified as file:filename) that contains that info. The Open MPI server is used to support multi-application data exchange via the MPI-2 MPI_Publish_name and MPI_Lookup_name functions.</string>
                    </property>
@@ -1051,59 +1051,26 @@ p, li { white-space: pre-wrap; }
                   </widget>
                  </item>
                  <item row="3" column="1" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_7">
+                  <widget class="QLineEdit" name="OMpiServerLineEdit">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
                   </widget>
                  </item>
-                </layout>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QGroupBox" name="groupBox_9">
-                <property name="title">
-                 <string>Debug </string>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_14">
-                 <item row="0" column="0">
-                  <widget class="QCheckBox" name="checkBox_16">
-                   <property name="toolTip">
-                    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Invoke the user-level debugger indicated by the &lt;span style=&quot; font-style:italic;&quot;&gt;orte_base_user_debugger&lt;/span&gt; MCA parameter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
+                 <item row="4" column="0">
+                  <widget class="QCheckBox" name="CartoFileCheckBox">
                    <property name="text">
-                    <string>debug</string>
+                    <string>cartofile</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <widget class="QCheckBox" name="checkBox_15">
-                   <property name="toolTip">
-                    <string>Set the maximum number of aborted processes to display.</string>
-                   </property>
-                   <property name="text">
-                    <string>aborted</string>
-                   </property>
-                  </widget>
+                 <item row="4" column="1" colspan="2">
+                  <widget class="QLineEdit" name="CartoFileLineEdit"/>
                  </item>
-                 <item row="0" column="2">
-                  <widget class="QSpinBox" name="spinBox_4">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="3">
-                  <widget class="QCheckBox" name="checkBox_18">
-                   <property name="toolTip">
-                    <string>Name of the executable that is to be used to start processes on the remote nodes. The default is &quot;orted&quot;. This option can be used to test new daemon concepts, or to pass options back to the daemons without having mpirun itself see them. For example, specifying a launch agent of orted -mca odls_base_verbose 5 allows the developer to ask the orted for debugging output without clutter from mpirun itself.</string>
-                   </property>
+                 <item row="4" column="3">
+                  <widget class="QToolButton" name="toolButton">
                    <property name="text">
-                    <string>launch-agent</string>
+                    <string>...</string>
                    </property>
                   </widget>
                  </item>
@@ -1122,6 +1089,86 @@ p, li { white-space: pre-wrap; }
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item row="1" column="0">
+               <widget class="QGroupBox" name="groupBox_9">
+                <property name="title">
+                 <string>Debug </string>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_14">
+                 <item row="1" column="0">
+                  <widget class="QCheckBox" name="DebugDaemonsCheckBox">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable debugging of any OmpiRTE daemons used by this application.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>debug-daemons</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QCheckBox" name="DebugDaemosFileCheckBox">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable debugging of any OmpiRTE daemons used by this application, storing output in files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>debug-daemons-file</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QCheckBox" name="NoPrefixCheckBox">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Disable the automatic --prefix behavior&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>noprefix</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QCheckBox" name="DebugCheckBox">
+                   <property name="toolTip">
+                    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Invoke the user-level debugger indicated by the &lt;span style=&quot; font-style:italic;&quot;&gt;orte_base_user_debugger&lt;/span&gt; MCA parameter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>debug</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QCheckBox" name="AbortedCheckBox">
+                   <property name="toolTip">
+                    <string>Set the maximum number of aborted processes to display.</string>
+                   </property>
+                   <property name="text">
+                    <string>aborted</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QSpinBox" name="AbortedSpinBox">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QCheckBox" name="LaunchAgentCheckBox">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Name of the executable that is to be used to start processes on the remote nodes. &lt;/p&gt;&lt;p&gt;The default is &amp;quot;orted&amp;quot;. This option can be used to test new daemon concepts, or to pass &lt;/p&gt;&lt;p&gt;options back to the daemons without having mpirun itself see them. &lt;/p&gt;&lt;p&gt;For example, specifying a launch agent of orted -mca odls_base_verbose 5 allows &lt;/p&gt;&lt;p&gt;the developer to ask the orted for debugging output without clutter from mpirun itself.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>launch-agent</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -1258,9 +1305,9 @@ p, li { white-space: pre-wrap; }
  </resources>
  <connections>
   <connection>
-   <sender>checkBox_21</sender>
+   <sender>OMpiServerCheckBox</sender>
    <signal>toggled(bool)</signal>
-   <receiver>lineEdit_7</receiver>
+   <receiver>OMpiServerLineEdit</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1274,9 +1321,9 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>checkBox_20</sender>
+   <sender>SeverWaitTimeCheckBox</sender>
    <signal>toggled(bool)</signal>
-   <receiver>spinBox_5</receiver>
+   <receiver>SeverWaitTimeSpinBox</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1290,9 +1337,9 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>checkBox_15</sender>
+   <sender>AbortedCheckBox</sender>
    <signal>toggled(bool)</signal>
-   <receiver>spinBox_4</receiver>
+   <receiver>AbortedSpinBox</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">

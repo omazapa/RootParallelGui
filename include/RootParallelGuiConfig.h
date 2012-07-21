@@ -25,8 +25,8 @@ class QStringList;
 namespace Ui {
    class  RootParallelGuiConfig;
 }
-namespace ROOT{
-   class ParallelGuiMpiConfig; 
+namespace ROOT {
+   class ParallelGuiMpiConfig;
 }
 #else
 #include<ui_RootParallelGuiConfig.h>
@@ -46,9 +46,9 @@ namespace ROOT {
       ParallelGuiConfig(QWidget *parent = 0);
       ~ParallelGuiConfig();
    protected slots:
-     void showRootMpiConfig();
+      void showRootMpiConfig();
    private:
-     ParallelGuiMpiConfig *fMpiConfigWidget;
+      ParallelGuiMpiConfig *fMpiConfigWidget;
       ClassDef(ParallelGuiConfig, 0)
    };
 }

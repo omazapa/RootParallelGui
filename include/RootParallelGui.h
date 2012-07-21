@@ -24,7 +24,7 @@ namespace Ui {
    class RootParallelGui;
 }
 class QMainWindow;
-namespace ROOT{
+namespace ROOT {
    class  ParallelGuiConfig;
 }
 #else
@@ -52,7 +52,7 @@ namespace ROOT {
    private:
       ParallelGuiConfig  *fConfigDialog;
       ParallelGuiMpiLauncher *fMpiLauncher;
-      
+
       ClassDef(ParallelGui, 1) //
    };
 }

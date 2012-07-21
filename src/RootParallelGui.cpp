@@ -21,18 +21,18 @@ ParallelGui::ParallelGui(QMainWindow *parent): QMainWindow(parent)
    setupUi(this);
    InitResources();
    connect(MpiLauncherPushButton, SIGNAL(clicked()), this, SLOT(showMpiLauncher()));
-   connect(actionConfiguration,SIGNAL(triggered()),this,SLOT(showConfiguration()));
-   connect(actionOuputPanel,SIGNAL(triggered()),OuptutDockWidget,SLOT(show()));
-    
+   connect(actionConfiguration, SIGNAL(triggered()), this, SLOT(showConfiguration()));
+   connect(actionOuputPanel, SIGNAL(triggered()), OuptutDockWidget, SLOT(show()));
 
-   fMpiLauncher=NULL;
-   fConfigDialog=NULL;
+
+   fMpiLauncher = NULL;
+   fConfigDialog = NULL;
 }
 
 ParallelGui::~ParallelGui()
 {
-  if(fMpiLauncher) delete fMpiLauncher;
-  if(fConfigDialog) delete fConfigDialog;
+   if (fMpiLauncher) delete fMpiLauncher;
+   if (fConfigDialog) delete fConfigDialog;
 }
 void ParallelGui::showMpiLauncher()
 {
@@ -46,8 +46,8 @@ void ParallelGui::showMpiLauncher()
 
 void ParallelGui::showConfiguration()
 {
-  fConfigDialog=new ParallelGuiConfig();
-  fConfigDialog->exec();
+   fConfigDialog = new ParallelGuiConfig();
+   fConfigDialog->exec();
 }
 
 void ParallelGui::prepend(QString msg)

@@ -40,9 +40,9 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    setupUi(this);
    InitResources();
    fMacro = NULL;
-   fSessionMenu=new QMenu("Session");
-   fSessionSave=new QAction("Save",this);
-   fSessionLoad=new QAction("Load",this);
+   fSessionMenu = new QMenu("Session");
+   fSessionSave = new QAction("Save", this);
+   fSessionLoad = new QAction("Load", this);
    SessionToolButton->setMenu(fSessionMenu);
    SessionToolButton->setPopupMode(QToolButton::MenuButtonPopup);
    fSessionMenu->addAction(fSessionSave);
@@ -86,7 +86,7 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    connect(AddNodeToolButton, SIGNAL(clicked()), this, SLOT(addNode()));
    connect(MarchineFileToolButton, SIGNAL(clicked()), this, SLOT(getMachineFile()));
    connect(RemoveNodeToolButton, SIGNAL(clicked()), this, SLOT(removeNode()));
-   connect(NodesSourceComboBox,SIGNAL(currentIndexChanged (int)),this,SLOT(NodesSourceChanged(int)));
+   connect(NodesSourceComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(NodesSourceChanged(int)));
    NodesTableWidget->setEnabled(false);
    AddNodeToolButton->setEnabled(false);
    RemoveNodeToolButton->setEnabled(false);
@@ -108,26 +108,27 @@ ParallelGuiMpiLauncher::~ParallelGuiMpiLauncher()
    delete fSessionMenu;
    delete fSessionSave;
 }
-void ParallelGuiMpiLauncher::getMachineFile(){
-    QString sFilePath=QFileDialog::getOpenFileName(this);
-    if(!sFilePath.isNull()) MachinesLineEdit->setText(sFilePath); 
+void ParallelGuiMpiLauncher::getMachineFile()
+{
+   QString sFilePath = QFileDialog::getOpenFileName(this);
+   if (!sFilePath.isNull()) MachinesLineEdit->setText(sFilePath);
 }
 
 void ParallelGuiMpiLauncher::NodesSourceChanged(int index)
 {
-  if(index==0){
-    MachinesLineEdit->setEnabled(true);
-    MarchineFileToolButton->setEnabled(true);
-    NodesTableWidget->setEnabled(false);
-    AddNodeToolButton->setEnabled(false);
-    RemoveNodeToolButton->setEnabled(false);
-  }else{
-    MachinesLineEdit->setEnabled(false);
-    MarchineFileToolButton->setEnabled(false);
-    NodesTableWidget->setEnabled(true);
-    AddNodeToolButton->setEnabled(true);
-    RemoveNodeToolButton->setEnabled(true);
-  }
+   if (index == 0) {
+      MachinesLineEdit->setEnabled(true);
+      MarchineFileToolButton->setEnabled(true);
+      NodesTableWidget->setEnabled(false);
+      AddNodeToolButton->setEnabled(false);
+      RemoveNodeToolButton->setEnabled(false);
+   } else {
+      MachinesLineEdit->setEnabled(false);
+      MarchineFileToolButton->setEnabled(false);
+      NodesTableWidget->setEnabled(true);
+      AddNodeToolButton->setEnabled(true);
+      RemoveNodeToolButton->setEnabled(true);
+   }
 }
 
 void ParallelGuiMpiLauncher::getPath()
@@ -286,81 +287,117 @@ void ParallelGuiMpiLauncher::launch()
    if (EnvironmentVariablesGroupBox->isChecked()) {
       Int_t rows = EnvironmentVariablesTableWidget->rowCount();
       for (Int_t i = 0; i < rows; i++) {
-	QString fVariable=EnvironmentVariablesTableWidget->item(i,0)->text();
-	QString fValue=EnvironmentVariablesTableWidget->item(i,1)->text();
-	if(!fVariable.isEmpty())
-	{
-	  if(!fValue.isEmpty())  args<<"-x"<<fVariable+"="+fValue;
-	  else args<<"-x"<<fVariable;
-	}
+         QString fVariable = EnvironmentVariablesTableWidget->item(i, 0)->text();
+         QString fValue = EnvironmentVariablesTableWidget->item(i, 1)->text();
+         if (!fVariable.isEmpty()) {
+            if (!fValue.isEmpty())  args << "-x" << fVariable + "=" + fValue;
+            else args << "-x" << fVariable;
+         }
       }
    }
    /***********************************************************
     *To specify which hosts (nodes) of the cluster to run on: *
     ***********************************************************/
-      if(NodesGroupBox->isChecked()){
-        if(NodesSourceComboBox->currentIndex()==0){
-	  QString sMachineFile=MachinesLineEdit->text();
-	  if(!sMachineFile.isEmpty()){args<<"-machinefile"<<sMachineFile;}
-	  else{
-	    QMessageBox::critical(this,"Error in tab Nodes","Enabled option machinefile, but not specified.");
-	    return;
-	  }
-	}else{
-	  int rows=NodesTableWidget->rowCount();
-	  if(rows>0) args<<"-H";
-	  QString sNodes;
-	  for(int i=0;i<rows;i++)
-	  {
-	    QString sNode=NodesTableWidget->item(i,0)->text();
-	    int     iSlots=static_cast<QSpinBox*>(NodesTableWidget->cellWidget(i,1))->value();
-	    if(!sNode.isEmpty()){
-	      for(int j=0;j<iSlots;j++){
-		sNodes+=sNode;
-		if(j<(iSlots-1)) sNodes+=",";
-	      }
-	    }
-	  }
-	  args<<sNodes;
-	}
+   if (NodesGroupBox->isChecked()) {
+      if (NodesSourceComboBox->currentIndex() == 0) {
+         QString sMachineFile = MachinesLineEdit->text();
+         if (!sMachineFile.isEmpty()) {
+            args << "-machinefile" << sMachineFile;
+         } else {
+            QMessageBox::critical(this, "Error in tab Nodes", "Enabled option machinefile, but not specified.");
+            return;
+         }
+      } else {
+         int rows = NodesTableWidget->rowCount();
+         if (rows > 0) args << "-H";
+         QString sNodes;
+         for (int i = 0; i < rows; i++) {
+            QString sNode = NodesTableWidget->item(i, 0)->text();
+            int     iSlots = static_cast<QSpinBox*>(NodesTableWidget->cellWidget(i, 1))->value();
+            if (!sNode.isEmpty()) {
+               for (int j = 0; j < iSlots; j++) {
+                  sNodes += sNode;
+                  if (j < (iSlots - 1)) sNodes += ",";
+               }
+            }
+         }
+         args << sNodes;
       }
-     /************************************** 
-      *Basic ROOT Options (Just for Macros)*
-      **************************************/
-      if(MacroBinaryComboBox->currentIndex()==0){
-	if(bCheckBox->isChecked()){
-	rootArgs<<"-b";	  
-	}
-
-	if(nCheckBox->isChecked()){
-	rootArgs<<"-n";	  
-	}
-	
-	if(qCheckBox->isChecked()){
-	rootArgs<<"-q";	  
-	}
-
-	if(nCheckBox->isChecked()){
-	rootArgs<<"-n";	  
-	}
-
-	if(lCheckBox->isChecked()){
-	rootArgs<<"-l";	  
-	}
-
-	if(xCheckBox->isChecked()){
-	rootArgs<<"-x";	  
-	}
-
-	if(memstatCheckBox->isChecked()){
-	rootArgs<<"-memstat";	  
-	}
+   }
+   /**************************************
+    *Basic ROOT Options (Just for Macros)*
+    **************************************/
+   if (MacroBinaryComboBox->currentIndex() == 0) {
+      if (bCheckBox->isChecked()) {
+         rootArgs << "-b";
       }
-//
-//     if(HeteroCheckBox->isChecked()){
-//       args<<"--hetero";
+
+      if (nCheckBox->isChecked()) {
+         rootArgs << "-n";
+      }
+
+      if (qCheckBox->isChecked()) {
+         rootArgs << "-q";
+      }
+
+      if (nCheckBox->isChecked()) {
+         rootArgs << "-n";
+      }
+
+      if (lCheckBox->isChecked()) {
+         rootArgs << "-l";
+      }
+
+      if (xCheckBox->isChecked()) {
+         rootArgs << "-x";
+      }
+
+      if (memstatCheckBox->isChecked()) {
+         rootArgs << "-memstat";
+      }
+   }
+
+   /***************************
+    *Others/Debug options     *
+    ***************************/
+   if (HeteroCheckBox->isChecked()) {
+      args << "--hetero";
+   }
+
+   if (LeaveSessionAttachedCheckBox->isChecked()) {
+      args << "-leave-session-attached";
+   }
+   if (WaitForServerCheckBox->isChecked()) {
+      args << "-wait-for-server";
+   }
+   if (SeverWaitTimeCheckBox->isChecked()) {
+      args << "-server-wait-time" << QVariant::fromValue<int>(SeverWaitTimeSpinBox->value()).toString();
+   }
+   if (OMpiServerCheckBox->isChecked()) {
+      if (!OMpiServerLineEdit->text().isEmpty()) {
+         args << "-ompi-server" << OMpiServerLineEdit->text();
+      } else {
+         QMessageBox::critical(this, "Error in tab Others/Debug", "Enabled option ompi-server, but not specified.");
+         return;
+      }
+   }
+   if (CartoFileCheckBox->isChecked()) {
+      if (!CartoFileLineEdit->text().isEmpty()) {
+         args << "--cartofile" << CartoFileLineEdit->text();
+      } else {
+         QMessageBox::critical(this, "Error in tab Others/Debug", "Enabled option cartofile, but not specified.");
+         return;
+      }
+   }
+   if (DebugCheckBox->isChecked()) {
+      args << "-debug";
+   }
+//     if(){
+//       args<<"";
 //     }
-
+//     if(){
+//       args<<"";
+//     }
    if (VerboseQuietComboBox->currentIndex() == 0) {
       args << "-v";
    } else {
@@ -372,7 +409,7 @@ void ParallelGuiMpiLauncher::launch()
 #endif
    if (MacroBinaryComboBox->currentIndex() == 0) {
 #ifdef _WIN32
-      args << "root.exe" <<rootArgs;
+      args << "root.exe" << rootArgs;
 #else
       args << "root" << rootArgs;
 #endif
@@ -551,16 +588,16 @@ void ParallelGuiMpiLauncher::ParseOutput(QByteArray &output)
 
 void ParallelGuiMpiLauncher::addNode()
 {
-   NodesTableWidget->insertRow(NodesTableWidget->rowCount()); 
-   QSpinBox *fNodes=new QSpinBox;
+   NodesTableWidget->insertRow(NodesTableWidget->rowCount());
+   QSpinBox *fNodes = new QSpinBox;
    fNodes->setMinimum(1);
    fNodes->setMaximum(99);
-   NodesTableWidget->setCellWidget(NodesTableWidget->rowCount()-1,1,fNodes);
+   NodesTableWidget->setCellWidget(NodesTableWidget->rowCount() - 1, 1, fNodes);
 }
 
 void ParallelGuiMpiLauncher::removeNode()
 {
-   NodesTableWidget->removeRow(NodesTableWidget->currentRow());  
+   NodesTableWidget->removeRow(NodesTableWidget->currentRow());
 }
 
 static void  InitResources()

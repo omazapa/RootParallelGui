@@ -27,6 +27,7 @@ class QStringList;
 class QTimer;
 class QFile;
 class QProcessEnvironment;
+class QAction;
 typedef Long64_t Q_PID;
 namespace Ui {
    class  RootParallelGuiMpiLauncher;
@@ -64,7 +65,7 @@ namespace ROOT {
       Bool_t bEmitOuput;
       QFile *fMacro;
       QProcessEnvironment env;
-      
+
    public:
       ParallelGuiMpiLauncher(QWidget *parent = 0);
       ~ParallelGuiMpiLauncher();

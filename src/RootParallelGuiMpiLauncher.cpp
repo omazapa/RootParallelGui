@@ -51,7 +51,8 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    connect(StopPushButton, SIGNAL(clicked()), this, SLOT(stop()));
    connect(ClosePushButton, SIGNAL(clicked()), this, SLOT(close()));
    connect(GetExecutableToolButton, SIGNAL(clicked()), this, SLOT(getExecutable()));
-
+   connect(GetCartoFileToolButton,SIGNAL(clicked()),this,SLOT(getCartoFile()));
+   
    timer = new QTimer(this);
    connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
 
@@ -108,10 +109,17 @@ ParallelGuiMpiLauncher::~ParallelGuiMpiLauncher()
    delete fSessionMenu;
    delete fSessionSave;
 }
+
 void ParallelGuiMpiLauncher::getMachineFile()
 {
    QString sFilePath = QFileDialog::getOpenFileName(this);
    if (!sFilePath.isNull()) MachinesLineEdit->setText(sFilePath);
+}
+
+void ParallelGuiMpiLauncher::getCartoFile()
+{
+   QString sFilePath = QFileDialog::getOpenFileName(this);
+   if (!sFilePath.isNull()) CartoFileLineEdit->setText(sFilePath);
 }
 
 void ParallelGuiMpiLauncher::NodesSourceChanged(int index)
@@ -186,6 +194,7 @@ void ParallelGuiMpiLauncher::launch()
       return;
    }
    args.clear();
+   rootArgs.clear();
    /*******************************
     * Processes to launch options *
     * *****************************/
@@ -304,7 +313,7 @@ void ParallelGuiMpiLauncher::launch()
          if (!sMachineFile.isEmpty()) {
             args << "-machinefile" << sMachineFile;
          } else {
-            QMessageBox::critical(this, "Error in tab Nodes", "Enabled option machinefile, but not specified.");
+            QMessageBox::critical(this, "Error in tab Nodes", "Enabled option machinefile, but file not specified.");
             return;
          }
       } else {
@@ -340,10 +349,6 @@ void ParallelGuiMpiLauncher::launch()
          rootArgs << "-q";
       }
 
-      if (nCheckBox->isChecked()) {
-         rootArgs << "-n";
-      }
-
       if (lCheckBox->isChecked()) {
          rootArgs << "-l";
       }
@@ -377,7 +382,7 @@ void ParallelGuiMpiLauncher::launch()
       if (!OMpiServerLineEdit->text().isEmpty()) {
          args << "-ompi-server" << OMpiServerLineEdit->text();
       } else {
-         QMessageBox::critical(this, "Error in tab Others/Debug", "Enabled option ompi-server, but not specified.");
+         QMessageBox::critical(this, "Error in tab Others/Debug", "Enabled option ompi-server, but server not specified.");
          return;
       }
    }
@@ -385,20 +390,34 @@ void ParallelGuiMpiLauncher::launch()
       if (!CartoFileLineEdit->text().isEmpty()) {
          args << "--cartofile" << CartoFileLineEdit->text();
       } else {
-         QMessageBox::critical(this, "Error in tab Others/Debug", "Enabled option cartofile, but not specified.");
+         QMessageBox::critical(this, "Error in tab Others/Debug", "Enabled option cartofile, but file not specified.");
          return;
       }
    }
-   if (DebugCheckBox->isChecked()) {
+    if(AbortedCheckBox->isChecked()){
+      args<<"-aborted"<<QVariant::fromValue<int>(AbortedSpinBox->value()).toString();
+    }   
+
+    if (DebugCheckBox->isChecked()) {
       args << "-debug";
    }
-//     if(){
-//       args<<"";
-//     }
-//     if(){
-//       args<<"";
-//     }
-   if (VerboseQuietComboBox->currentIndex() == 0) {
+    if (DebugLevelCheckBox->isChecked()) {
+      args << "--debug-devel";
+   }
+    if(DebugDaemonsCheckBox->isChecked()){
+      args<<"--debug-daemons";
+    }
+    if(DebugDaemosFileCheckBox->isChecked()){
+      args<<"--debug-daemons-file";
+    }
+    if(LaunchAgentCheckBox->isChecked()){
+      args<<"-launch-agent";
+    }
+    if(NoPrefixCheckBox->isChecked()){
+      args<<"--noprefix";
+    }
+
+    if (VerboseQuietComboBox->currentIndex() == 0) {
       args << "-v";
    } else {
       args << "-q";
@@ -561,6 +580,10 @@ void ParallelGuiMpiLauncher::setMacroBinaryMode(int mode)
       tabWidget->setTabEnabled(5, true);
       RootOptionsGroupBox->setEnabled(true);
    } else {
+      if(fMacro){
+	delete fMacro;
+	fMacro=NULL;
+      } 
       tabWidget->setTabEnabled(5, false);
       RootOptionsGroupBox->setEnabled(false);
    }
@@ -591,7 +614,7 @@ void ParallelGuiMpiLauncher::addNode()
    NodesTableWidget->insertRow(NodesTableWidget->rowCount());
    QSpinBox *fNodes = new QSpinBox;
    fNodes->setMinimum(1);
-   fNodes->setMaximum(99);
+   fNodes->setMaximum(255);
    NodesTableWidget->setCellWidget(NodesTableWidget->rowCount() - 1, 1, fNodes);
 }
 

@@ -89,6 +89,7 @@ namespace ROOT {
       void getPrefix();
       void getTmpDir();
       void getWdir();
+      void getCartoFile();
       void getPreloadFiles();
       void removePreloadFiles();
       void getPreloadFilesDestDir();

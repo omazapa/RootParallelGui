@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>738</width>
-    <height>600</height>
+    <width>854</width>
+    <height>609</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,7 +59,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>738</width>
+     <width>854</width>
      <height>20</height>
     </rect>
    </property>
@@ -125,7 +125,7 @@ p, li { white-space: pre-wrap; }
           <x>0</x>
           <y>0</y>
           <width>227</width>
-          <height>234</height>
+          <height>243</height>
          </rect>
         </property>
         <attribute name="label">

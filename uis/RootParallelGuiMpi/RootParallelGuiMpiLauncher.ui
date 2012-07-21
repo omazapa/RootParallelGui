@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>704</width>
-    <height>488</height>
+    <height>558</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,8 +48,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>675</width>
-        <height>513</height>
+        <width>690</width>
+        <height>517</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -111,7 +111,7 @@
           <item row="0" column="0">
            <widget class="QTabWidget" name="tabWidget">
             <property name="currentIndex">
-             <number>4</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -415,7 +415,7 @@ implicitly sets &quot;max_slots&quot; equal to the &quot;slots&quot; value for e
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>616</width>
+                   <width>631</width>
                    <height>432</height>
                   </rect>
                  </property>
@@ -1065,12 +1065,42 @@ p, li { white-space: pre-wrap; }
                   </widget>
                  </item>
                  <item row="4" column="1" colspan="2">
-                  <widget class="QLineEdit" name="CartoFileLineEdit"/>
+                  <widget class="QLineEdit" name="CartoFileLineEdit">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
                  </item>
                  <item row="4" column="3">
-                  <widget class="QToolButton" name="toolButton">
+                  <widget class="QToolButton" name="GetCartoFileToolButton">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
                    <property name="text">
                     <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QCheckBox" name="AbortedCheckBox">
+                   <property name="toolTip">
+                    <string>Set the maximum number of aborted processes to display.</string>
+                   </property>
+                   <property name="text">
+                    <string>aborted</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QSpinBox" name="AbortedSpinBox">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="suffix">
+                    <string>   ranks/procs</string>
+                   </property>
+                   <property name="maximum">
+                    <number>255</number>
                    </property>
                   </widget>
                  </item>
@@ -1096,7 +1126,7 @@ p, li { white-space: pre-wrap; }
                  <string>Debug </string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_14">
-                 <item row="1" column="0">
+                 <item row="0" column="3">
                   <widget class="QCheckBox" name="DebugDaemonsCheckBox">
                    <property name="toolTip">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable debugging of any OmpiRTE daemons used by this application.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1106,23 +1136,33 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
-                  <widget class="QCheckBox" name="DebugDaemosFileCheckBox">
-                   <property name="toolTip">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable debugging of any OmpiRTE daemons used by this application, storing output in files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                   <property name="text">
-                    <string>debug-daemons-file</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="2">
+                 <item row="1" column="3">
                   <widget class="QCheckBox" name="NoPrefixCheckBox">
                    <property name="toolTip">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Disable the automatic --prefix behavior&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                    <property name="text">
                     <string>noprefix</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QCheckBox" name="LaunchAgentCheckBox">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Name of the executable that is to be used to start processes on the remote nodes. &lt;/p&gt;&lt;p&gt;The default is &amp;quot;orted&amp;quot;. This option can be used to test new daemon concepts, or to pass &lt;/p&gt;&lt;p&gt;options back to the daemons without having mpirun itself see them. &lt;/p&gt;&lt;p&gt;For example, specifying a launch agent of orted -mca odls_base_verbose 5 allows &lt;/p&gt;&lt;p&gt;the developer to ask the orted for debugging output without clutter from mpirun itself.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>launch-agent</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QCheckBox" name="DebugDaemosFileCheckBox">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable debugging of any OmpiRTE daemons used by this application, storing output in files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="text">
+                    <string>debug-daemons-file</string>
                    </property>
                   </widget>
                  </item>
@@ -1141,29 +1181,16 @@ p, li { white-space: pre-wrap; }
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QCheckBox" name="AbortedCheckBox">
+                  <widget class="QCheckBox" name="DebugLevelCheckBox">
                    <property name="toolTip">
-                    <string>Set the maximum number of aborted processes to display.</string>
+                    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enable debugging of the OmpiRTE (the run-time layer in Open MPI). This is not generally useful for most users.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                    <property name="text">
-                    <string>aborted</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
-                  <widget class="QSpinBox" name="AbortedSpinBox">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="3">
-                  <widget class="QCheckBox" name="LaunchAgentCheckBox">
-                   <property name="toolTip">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Name of the executable that is to be used to start processes on the remote nodes. &lt;/p&gt;&lt;p&gt;The default is &amp;quot;orted&amp;quot;. This option can be used to test new daemon concepts, or to pass &lt;/p&gt;&lt;p&gt;options back to the daemons without having mpirun itself see them. &lt;/p&gt;&lt;p&gt;For example, specifying a launch agent of orted -mca odls_base_verbose 5 allows &lt;/p&gt;&lt;p&gt;the developer to ask the orted for debugging output without clutter from mpirun itself.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                   <property name="text">
-                    <string>launch-agent</string>
+                    <string>debug-devel</string>
                    </property>
                   </widget>
                  </item>
@@ -1315,8 +1342,8 @@ p, li { white-space: pre-wrap; }
      <y>251</y>
     </hint>
     <hint type="destinationlabel">
-     <x>201</x>
-     <y>253</y>
+     <x>421</x>
+     <y>257</y>
     </hint>
    </hints>
   </connection>
@@ -1343,12 +1370,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>307</x>
-     <y>318</y>
+     <x>185</x>
+     <y>309</y>
     </hint>
     <hint type="destinationlabel">
-     <x>446</x>
-     <y>319</y>
+     <x>382</x>
+     <y>310</y>
     </hint>
    </hints>
   </connection>
@@ -1363,8 +1390,8 @@ p, li { white-space: pre-wrap; }
      <y>224</y>
     </hint>
     <hint type="destinationlabel">
-     <x>236</x>
-     <y>222</y>
+     <x>446</x>
+     <y>235</y>
     </hint>
    </hints>
   </connection>
@@ -1379,8 +1406,8 @@ p, li { white-space: pre-wrap; }
      <y>333</y>
     </hint>
     <hint type="destinationlabel">
-     <x>339</x>
-     <y>346</y>
+     <x>655</x>
+     <y>347</y>
     </hint>
    </hints>
   </connection>
@@ -1395,8 +1422,8 @@ p, li { white-space: pre-wrap; }
      <y>193</y>
     </hint>
     <hint type="destinationlabel">
-     <x>239</x>
-     <y>207</y>
+     <x>446</x>
+     <y>209</y>
     </hint>
    </hints>
   </connection>
@@ -1423,12 +1450,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>66</x>
-     <y>163</y>
+     <x>88</x>
+     <y>188</y>
     </hint>
     <hint type="destinationlabel">
-     <x>579</x>
-     <y>177</y>
+     <x>633</x>
+     <y>189</y>
     </hint>
    </hints>
   </connection>
@@ -1455,12 +1482,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>77</x>
-     <y>193</y>
+     <x>99</x>
+     <y>215</y>
     </hint>
     <hint type="destinationlabel">
-     <x>577</x>
-     <y>202</y>
+     <x>633</x>
+     <y>216</y>
     </hint>
    </hints>
   </connection>
@@ -1487,12 +1514,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>82</x>
-     <y>244</y>
+     <x>104</x>
+     <y>267</y>
     </hint>
     <hint type="destinationlabel">
-     <x>590</x>
-     <y>254</y>
+     <x>633</x>
+     <y>268</y>
     </hint>
    </hints>
   </connection>
@@ -1519,12 +1546,44 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>87</x>
-     <y>272</y>
+     <x>105</x>
+     <y>294</y>
     </hint>
     <hint type="destinationlabel">
-     <x>581</x>
-     <y>279</y>
+     <x>633</x>
+     <y>295</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>CartoFileCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>CartoFileLineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>223</x>
+     <y>267</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>257</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>CartoFileCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>GetCartoFileToolButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>273</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>284</y>
     </hint>
    </hints>
   </connection>

@@ -43,7 +43,16 @@ void ParallelGuiMpiConfig::GetRootMpiPath()
 
 void ParallelGuiMpiConfig::Apply()
 {
-   fConfigSettings->setValue("RootMpiCommandPath", RootMpiPathLineEdit->text());
-   fConfigSettings->sync();
+   if(RootMpiEnvironmentRadioButton->isChecked())
+   {
+      fConfigSettings->setValue("RootMpiEnvironment", RootMpiEnvironmentRadioButton->isChecked());     
+   }else{
+      if(RootMpiPathLineEdit->text().isEmpty()){
+	QMessageBox::warning(this,tr("Error Saving Configuration"),tr("The path for rootmpi command is empty."));
+	return;
+      }
+      fConfigSettings->setValue("RootMpiEnvironment", ExecutablePathRadioButton->isChecked());
+      fConfigSettings->setValue("RootMpiCommandPath", RootMpiPathLineEdit->text());
+  }
 }
 

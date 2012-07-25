@@ -44,7 +44,7 @@ ParallelGuiMpiLauncher::ParallelGuiMpiLauncher(QWidget *parent): QWidget(parent)
    fSessionMenu = new QMenu("Session");
    fSessionSave = new QAction("Save", this);
    fSessionLoad = new QAction("Load", this);
-   fHighLihgter = new ROOT::ParallelGuiMacroHighlighter(MacroTextEdit->document());
+   fHighLihgter = new ParallelGuiMacroHighlighter(MacroTextEdit->document());
    SessionToolButton->setMenu(fSessionMenu);
    SessionToolButton->setPopupMode(QToolButton::MenuButtonPopup);
    fSessionMenu->addAction(fSessionSave);

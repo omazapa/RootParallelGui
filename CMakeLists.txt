@@ -101,8 +101,9 @@ ${ROOT_PARALLEL_GUI_UIS_HDRS}
 ${ROOT_PARALLEL_GUI_MOC_SRCS}
 )
 
-TARGET_LINK_LIBRARIES(ParallelGui ${ROOT_LIBS} ${QT_LIBRARIES} )
-ADD_DEPENDENCIES(ParallelGui ParallelGuiMpi)
+TARGET_LINK_LIBRARIES(ParallelGui ${ROOT_LIBS} ${QT_LIBRARIES} ParallelGuiMpiStatic ParallelGuiMacroEditorStatic)
+ADD_DEPENDENCIES(ParallelGui ParallelGuiMpiStatic)
+ADD_DEPENDENCIES(ParallelGui ParallelGuiMacroEditorStatic)
 
 SET(ROOT_PARALLEL_GUI_MAIN_SRCS ${CMAKE_SOURCE_DIR}/src/RootParallelGuiMain.cpp)
 
@@ -110,7 +111,7 @@ ADD_EXECUTABLE(RootParallelGui
 ${ROOT_PARALLEL_GUI_MAIN_SRCS}
 )
 
-TARGET_LINK_LIBRARIES(RootParallelGui ParallelGuiStatic ParallelGuiMpiStatic ParallelGuiMacroEditorStatic  ${ROOT_LIBS} ${QT_LIBRARIES})
+TARGET_LINK_LIBRARIES(RootParallelGui ParallelGuiStatic ParallelGuiMpiStatic ParallelGuiMacroEditorStatic ${ROOT_LIBS} ${QT_LIBRARIES})
 
 MINSTALLTARGET("LIB" ParallelGui)
 MINSTALLTARGET("BIN" RootParallelGui)

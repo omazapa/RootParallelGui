@@ -45,7 +45,7 @@ namespace ROOT {
    public:
       ParallelGuiConfig(QWidget *parent = 0);
       ~ParallelGuiConfig();
-   protected slots:
+   public slots:
       void showRootMpiConfig();
    private:
       ParallelGuiMpiConfig *fMpiConfigWidget;

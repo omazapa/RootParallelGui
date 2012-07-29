@@ -44,7 +44,7 @@ namespace ROOT {
    public:
       ParallelGuiMpiConfig(QWidget *parent = 0);
       ~ParallelGuiMpiConfig();
-   protected slots:
+   public slots:
       void GetRootMpiPath();
       void Apply();
    private:

@@ -324,7 +324,6 @@ void ParallelGuiMpiLauncher::launch()
          }
       } else {
          int rows = NodesTableWidget->rowCount();
-         if (rows > 0) args << "-H";
          QString sNodes;
          for (int i = 0; i < rows; i++) {
             QString sNode = NodesTableWidget->item(i, 0)->text();
@@ -335,8 +334,12 @@ void ParallelGuiMpiLauncher::launch()
                   if (j < (iSlots - 1)) sNodes += ",";
                }
             }
+            if (i < (rows - 1)) sNodes += ",";
          }
-         args << sNodes;
+         if (rows > 0){
+	  args << "-H";
+          args << sNodes;  
+	}
       }
    }
    /**************************************
@@ -454,7 +457,7 @@ void ParallelGuiMpiLauncher::runProcess()
    connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(readStandardOutput()));
    connect(process, SIGNAL(started()), this, SLOT(started()));
    connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(finished(int, QProcess::ExitStatus)));
-//    qDebug() << args.join(" ");
+   qDebug() << args.join(" ");
    process->start(MpiRunPath, args);
    if (!process->waitForStarted()) {
       emit sendOutput(tr("Error Starting") + ExecutableLineEdit->text() + "<br>Msg:" + process->errorString().replace("\n", "<br>"));

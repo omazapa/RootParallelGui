@@ -29,7 +29,7 @@ ELSEIF(${CMAKE_HOST_SYSTEM} MATCHES "Windows")
 ELSEIF(${CMAKE_HOST_APPLE} )
         #Not supported yet
 ENDIF()
-SET(ROOTVERSION "5.32")
+SET(ROOTVERSION "5.34")
 SET(PLUGIN_NAME "root-parallel-gui")
 
 INCLUDE("${CMAKE_SOURCE_DIR}/cmake/RootMpiInstaller.cmake")

@@ -457,7 +457,7 @@ void ParallelGuiMpiLauncher::runProcess()
    connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(readStandardOutput()));
    connect(process, SIGNAL(started()), this, SLOT(started()));
    connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(finished(int, QProcess::ExitStatus)));
-   qDebug() << args.join(" ");
+//    qDebug() << args.join(" ");
    process->start(MpiRunPath, args);
    if (!process->waitForStarted()) {
       emit sendOutput(tr("Error Starting") + ExecutableLineEdit->text() + "<br>Msg:" + process->errorString().replace("\n", "<br>"));
